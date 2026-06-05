@@ -4,7 +4,7 @@ import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function About() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <div className="w-full py-20 px-6 md:px-[8%] bg-bg-deep animate-fade-in-up">
@@ -88,6 +88,61 @@ export default function About() {
             </div>
           </div>
         </div>
+
+        {/* Meet the Bluebird Mascot section on About page */}
+        <section className="mt-24 border-t border-line/10 pt-16">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <span className="text-xs font-bold tracking-[8px] text-bluebird uppercase block mb-3">
+              Mascot Design
+            </span>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-ink uppercase tracking-tight leading-none mb-4">
+              {t('mascot.title')}
+            </h2>
+            <div className="h-[2px] bg-accent w-16 mx-auto mt-3"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Grey Sketch */}
+            <div className="lg:col-span-4 relative flex justify-center">
+              <div className="relative aspect-square w-full max-w-[280px] border border-accent/20 shadow-xl rounded-sm overflow-hidden bg-bg-panel/40">
+                <img 
+                  src="/character_grey.jpg" 
+                  alt="Mascot original grey hand sketch" 
+                  className="w-full h-full object-cover filter contrast-105 brightness-95 hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-2 left-2 bg-bg-deep/80 backdrop-blur-sm px-3 py-1 border border-line/20 rounded-sm text-[10px] text-ink-muted uppercase tracking-widest font-semibold">
+                  Original Sketch
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Column: Story */}
+            <div className="lg:col-span-4 flex flex-col gap-4 text-sm font-light text-ink-muted leading-relaxed text-center lg:text-justify px-4">
+              <p>
+                {t('mascot.desc')}
+              </p>
+              <p>
+                {language === 'th'
+                  ? 'จากภาพร่างดินสอสู่น้องนกแจ๊สสีฟ้าครามตัวจริงที่เป็นตัวแทนความสนุกสนาน ความอบอุ่น และความหลงใหลในเสียงดนตรีอะคูสติกอย่างลงตัว'
+                  : 'From pencil sketch to our final brand character, representing joy, warmth, and the organic textures of raw acoustic live jazz.'}
+              </p>
+            </div>
+
+            {/* Right Column: Colored Version */}
+            <div className="lg:col-span-4 relative flex justify-center">
+              <div className="relative aspect-square w-full max-w-[280px] border border-accent/20 shadow-xl rounded-sm overflow-hidden bg-bg-panel/40">
+                <img 
+                  src="/character_color.jpg" 
+                  alt="Mascot final color design" 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-2 left-2 bg-bg-deep/80 backdrop-blur-sm px-3 py-1 border border-accent/20 rounded-sm text-[10px] text-accent uppercase tracking-widest font-semibold">
+                  Final Color
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Big landscape image showing aesthetic detail */}
         <div className="mt-24 bg-bg-panel border border-accent/20 rounded-sm aspect-[21/9] relative flex items-center justify-center shadow-2xl overflow-hidden group">

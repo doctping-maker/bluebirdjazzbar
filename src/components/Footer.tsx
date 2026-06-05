@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
         {/* Branding & description */}
         <div className="flex flex-col gap-4">
           <Link href="/" className="block select-none -ml-1">
-            <Logo size={48} />
+            <Logo size={68} />
           </Link>
           <p className="text-[13px] leading-relaxed mt-2 text-ink-muted/80 font-light">
             {t('hero.tagline')}

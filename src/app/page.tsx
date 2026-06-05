@@ -288,6 +288,35 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Story 4: Meet Our Mascot */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Content Left (on desktop) */}
+            <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col gap-4">
+              <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">Brand Mascot</span>
+              <h3 className="font-display font-bold text-3xl text-ink uppercase tracking-wide">
+                Meet the Bluebird
+              </h3>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                Our official mascot is a cute, egg-shaped teal bird who loves nothing more than classic jazz and vintage vinyl records. You will spot him throughout our bar—on our signboards, our menus, and our custom bird-shaped cocktail glasses.
+              </p>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                He represents the playful, warm, and welcoming spirit of Bluebird Jazz Bar. Whether he is playing his yellow saxophone or spinning a classic record, he is here to make you feel right at home in the nest.
+              </p>
+            </div>
+
+            {/* Image Right */}
+            <div className="lg:col-span-6 order-1 lg:order-2 relative">
+              <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
+                <img 
+                  src="/character_color.jpg" 
+                  alt="Official Bluebird Mascot playing Saxophone" 
+                  className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="hidden md:block absolute -top-4 -right-4 w-full h-full border border-accent/10 rounded-sm pointer-events-none z-0" />
+            </div>
+          </div>
+
         </div>
       </section>
 

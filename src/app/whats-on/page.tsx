@@ -75,18 +75,27 @@ export default function WhatsOn() {
         </div>
 
         {/* Wednesday Jam Session Details Box */}
-        <div className="bg-bg-panel/40 backdrop-blur-sm border border-accent/25 p-8 sm:p-12 rounded-sm mb-16 relative shadow-xl">
+        <div className="bg-bg-panel/40 backdrop-blur-sm border border-accent/25 p-8 sm:p-12 rounded-sm mb-16 relative shadow-xl overflow-hidden group">
           <div className="absolute top-4 left-4 right-4 bottom-4 border border-accent/5 pointer-events-none" />
           
-          <div className="flex flex-col sm:flex-row items-start gap-6 relative z-10">
-            <div className="text-accent text-3xl mt-1">
-              <i className="fas fa-compact-disc animate-spin-slow" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            {/* Mascot Band Image */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-md rounded-sm overflow-hidden bg-bg-deep/60">
+                <img 
+                  src="/character_band.jpg" 
+                  alt="Bluebird Mascot Jam Session Band" 
+                  className="w-full h-full object-cover filter brightness-[0.9] contrast-[1.05] hover:scale-105 transition-transform duration-500"
+                />
+              </div>
             </div>
-            <div className="flex-grow">
-              <h3 className="font-display font-bold text-2xl text-ink uppercase tracking-wide mb-3">
+            {/* Jam Session Info Text */}
+            <div className="lg:col-span-7 flex flex-col gap-3">
+              <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">{t('mascot.bandTitle')}</span>
+              <h3 className="font-display font-bold text-2xl text-ink uppercase tracking-wide">
                 {t('whatsOn.jamTitle')}
               </h3>
-              <p className="text-sm text-ink-muted leading-relaxed font-light mb-6">
+              <p className="text-sm text-ink-muted leading-relaxed font-light mb-2">
                 {t('whatsOn.jamDesc')}
               </p>
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-accent/90 bg-bg-deep/40 px-5 py-3.5 rounded-sm w-fit border border-line/10">

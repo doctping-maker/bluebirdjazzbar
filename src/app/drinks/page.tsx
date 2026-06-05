@@ -103,6 +103,31 @@ export default function Drinks() {
               </div>
             ))}
         </div>
+ 
+        {/* Mascot Wine Card at the bottom of the drinks page */}
+        <div className="mt-12 bg-bg-panel/40 backdrop-blur-sm border border-accent/25 p-8 sm:p-10 rounded-sm flex flex-col md:flex-row items-center gap-8 relative shadow-xl overflow-hidden">
+          <div className="absolute top-4 left-4 right-4 bottom-4 border border-accent/5 pointer-events-none" />
+          
+          <div className="w-full md:w-1/3 max-w-[200px] flex-shrink-0 z-10">
+            <div className="relative aspect-square border border-accent/20 rounded-sm overflow-hidden bg-bg-deep shadow-md">
+              <img 
+                src="/character_pride.jpg" 
+                alt="Bluebird Mascot Toasting Wine" 
+                className="w-full h-full object-cover filter brightness-[0.9] hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+          
+          <div className="flex-grow z-10 flex flex-col gap-2">
+            <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">Bluebird Cheer</span>
+            <h3 className="font-display font-bold text-2xl text-ink uppercase tracking-wide">
+              {t('mascot.cheerTitle')}
+            </h3>
+            <p className="text-sm text-ink-muted leading-relaxed font-light">
+              {t('mascot.cheerDesc')}
+            </p>
+          </div>
+        </div>
 
       </div>
     </div>

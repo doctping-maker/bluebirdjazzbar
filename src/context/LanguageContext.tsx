@@ -85,7 +85,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "กำลังเล่นแผ่นไวนิล",
     "vinyl.artist": "เซสชันไวนิลคลาสสิก",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar ทองหล่อ. สงวนลิขสิทธิ์. ออกแบบระบบตามแบบอย่าง Blue Note NYC โดยไม่คัดลอกสื่อลิขสิทธิ์"
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar ทองหล่อ. สงวนลิขสิทธิ์. ออกแบบระบบตามแบบอย่าง Blue Note NYC โดยไม่คัดลอกสื่อลิขสิทธิ์",
+    "mascot.title": "เบื้องหลังการออกแบบมาสคอต",
+    "mascot.desc": "น้องนกบลูเบิร์ดเริ่มต้นมาจากภาพสเก็ตช์ดินสอ เพื่อสื่อความอบอุ่น เป็นกันเอง และรักในดนตรีแจ๊ส ท่วงทำนองสด และแผ่นเสียงไวนิลคลาสสิก",
+    "mascot.bandTitle": "แจมเซสชันกับวงน้องนก",
+    "mascot.bandDesc": "เวทีวันพุธเปิดกว้างสำหรับแจ๊สเซสชันสุดพิเศษ ร่วมบรรเลงโดยวงมาสคอตสุดน่ารักของเรา",
+    "mascot.cheerTitle": "ชนแก้วและฉลองร่วมกัน",
+    "mascot.cheerDesc": "ร้านของเราต้อนรับความหลากหลายและความสุขในเสียงเพลงของทุกๆ คน ชื่นชมเครื่องดื่มรสเลิศ ไปพร้อมๆ กับการดื่มด่ำดนตรีแจ๊สสุดพิเศษที่นี่!"
   },
   en: {
     "nav.home": "Home",
@@ -161,7 +167,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "Now Spinning",
     "vinyl.artist": "Classic Vinyl Session",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. All rights reserved. Structured after Blue Note NYC; no copyrighted assets are used."
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. All rights reserved. Structured after Blue Note NYC; no copyrighted assets are used.",
+    "mascot.title": "Behind The Mascot Design",
+    "mascot.desc": "The Bluebird mascot started as a cozy hand-drawn pencil sketch, expressing our love for classical live jazz and vintage vinyl records.",
+    "mascot.bandTitle": "Nest Jam Session",
+    "mascot.bandDesc": "Our Wednesday stage is open for special jam sessions, joined by our lovely mascot band playing together.",
+    "mascot.cheerTitle": "Cheers & Celebrations",
+    "mascot.cheerDesc": "Our nest welcomes everyone to celebrate diversity, love, and fine music. Grab a glass of wine or beer and let the jazz lift your spirits!"
   },
   ja: {
     "nav.home": "ホーム",
@@ -237,7 +249,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "レコード再生中",
     "vinyl.artist": "クラシックレコードセッション",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar トンロー. All rights reserved. Designed after Blue Note NYC; no copyrighted assets used."
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar トンロー. All rights reserved. Designed after Blue Note NYC; no copyrighted assets used.",
+    "mascot.title": "マスコットデザインの裏話",
+    "mascot.desc": "ブルーバードのマスコットは、温かみのある手描きの鉛筆スケッチから始まり、クラシックなライブジャズとヴィンテージレコードへの愛を表現しています。",
+    "mascot.bandTitle": "ネスト・ジャム・セッション",
+    "mascot.bandDesc": "水曜日のステージは、マスコットバンドによる演奏を交えた特別なジャмセッションのために開放されています。",
+    "mascot.cheerTitle": "乾杯と祝福",
+    "mascot.cheerDesc": "私たちの巣は、多様性、愛、そして素晴らしい音楽を祝うために皆様を歓迎します。ワインやビールを片手にジャズを楽しみましょう！"
   },
   ko: {
     "nav.home": "홈",
@@ -313,7 +331,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "지금 재생 중",
     "vinyl.artist": "클래식 바이닐 세션",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar 통로. All rights reserved. Blue Note NYC를 벤치마킹하여 합법적으로 개발되었습니다."
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar 통로. All rights reserved. Blue Note NYC를 벤치마킹하여 합법적으로 개발되었습니다.",
+    "mascot.title": "마스코트 디자인 비하인드",
+    "mascot.desc": "블루버드 마스코트는 따뜻한 연필 스케치로 시작하여 클래식 라이브 재즈와 빈티지 바이닐 레코드에 대한 사랑을 표현합니다.",
+    "mascot.bandTitle": "네스트 잼 세션",
+    "mascot.bandDesc": "수요일 무대는 저희 귀여운 마스코트 밴드와 함께 연주하는 특별한 잼 세션을 위해 열려 있습니다.",
+    "mascot.cheerTitle": "건배와 축하",
+    "mascot.cheerDesc": "저희 블루버드는 다양성, 사랑, 훌륭한 음악을 함께 축하하기 위해 모든 분을 환영합니다. 와인이나 맥주를 들고 재즈를 즐겨보세요!"
   },
   ru: {
     "nav.home": "Главная",
@@ -389,7 +413,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "Сейчас на проигрывателе",
     "vinyl.artist": "Виниловая сессия",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Все права защищены. Разработано по мотивам Blue Note NYC; авторские права соблюдены."
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Все права защищены. Разработано по мотивам Blue Note NYC; авторские права соблюдены.",
+    "mascot.title": "История создания маскота",
+    "mascot.desc": "Наш талисман Синяя птица начинался как уютный карандашный набросок от руки, выражающий нашу любовь к классическому живому джазу и винилу.",
+    "mascot.bandTitle": "Джем-сейшен в гнезде",
+    "mascot.bandDesc": "Наша сцена по средам открыта для особых джем-сейшенов с участием нашей очаровательной группы маскотов.",
+    "mascot.cheerTitle": "Будем здоровы!",
+    "mascot.cheerDesc": "Наше гнездо приветствует всех, празднуя разнообразие, любовь и хорошую музыку. Возьмите бокал вина или пива и наслаждайтесь джазом!"
   },
   es: {
     "nav.home": "Inicio",
@@ -465,7 +495,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "Reproduciendo",
     "vinyl.artist": "Sesión de Vinilo",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Todos los derechos reservados. Inspirado en Blue Note NYC; respetando los derechos de autor."
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Todos los derechos reservados. Inspirado en Blue Note NYC; respetando los derechos de autor.",
+    "mascot.title": "Detrás del diseño del mascot",
+    "mascot.desc": "El Bluebird mascot comenzó como un boceto a lápiz hecho a mano, que expresa nuestro amor por el jazz clásico en vivo y los discos de vinilo vintage.",
+    "mascot.bandTitle": "Sesión de Jam en el Nido",
+    "mascot.bandDesc": "Nuestro escenario de los miércoles está abierto para sesiones de jam especiales con nuestra adorable banda de mascotas.",
+    "mascot.cheerTitle": "Salud y Celebración",
+    "mascot.cheerDesc": "Nuestro nido da la bienvenida a todos para celebrar la diversidad, el amor y la buena música. ¡Toma una copa de vino o cerveza y disfruta del jazz!"
   }
 };
 
