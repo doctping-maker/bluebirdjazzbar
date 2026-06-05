@@ -181,61 +181,113 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. The Vibe Section (Editorial Story) */}
+      {/* 3. The Stories of the Nest (Editorial Storytelling Grid) */}
       <section className="py-24 px-6 md:px-[8%] bg-bg-panel border-y border-line">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="max-w-7xl mx-auto flex flex-col gap-24">
           
-          {/* Left Column: Overlapping Images */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
-              <img 
-                src="/premium_jazz_sax.png" 
-                alt="Bluebird Saxophone Spotlight" 
-                className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
-              />
+          {/* Header */}
+          <div className="text-center max-w-xl mx-auto mb-4">
+            <span className="text-xs font-bold tracking-[8px] text-bluebird uppercase block mb-3">
+              {t('about.subtitle')}
+            </span>
+            <h2 className="font-display font-bold text-4xl sm:text-5xl text-ink uppercase tracking-tight leading-none mb-4">
+              THE STORIES OF <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">OUR NEST</span>
+            </h2>
+            <div className="h-[2px] bg-accent w-20 mx-auto mt-4"></div>
+          </div>
+
+          {/* Story 1: Acoustic Sanctuary */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Image Left */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
+                <img 
+                  src="/premium_jazz_sax.png" 
+                  alt="Bluebird Acoustic Sanctuary" 
+                  className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="hidden md:block absolute -top-4 -left-4 w-full h-full border border-accent/10 rounded-sm pointer-events-none z-0" />
             </div>
-            {/* Overlapping offset frame for depth */}
-            <div className="hidden md:block absolute -top-8 -left-8 w-full h-full border border-accent/15 rounded-sm pointer-events-none z-0" />
-            <div className="absolute -bottom-6 -right-6 bg-bg-deep border border-line p-6 rounded-sm shadow-xl max-w-[240px] z-20">
-              <span className="font-accent text-4xl text-accent block mb-1">Acoustic Nest</span>
-              <p className="text-[11px] text-ink-muted/80 leading-relaxed font-light">
-                Designed with natural wood panels, warm lighting, and retro speakers to capture the authentic, warm, vintage analog sound.
+            
+            {/* Content Right */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">Sanctuary</span>
+              <h3 className="font-display font-bold text-3xl text-ink uppercase tracking-wide">
+                A Living Room for Sound
+              </h3>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                Unlike commercial venues, Bluebird is an intimate space hidden on the 3rd floor in Thonglor. It's a sanctuary designed for pure listening, where vinyl records and live acoustic jazz merge in warm, analog harmony.
+              </p>
+              <p className="text-sm text-ink-muted leading-relaxed font-light italic border-l-2 border-accent pl-4">
+                "We believe that jazz is best experienced up close. In our nest, you're not just watching a performance—you're sharing a living room with the musicians."
               </p>
             </div>
           </div>
 
-          {/* Right Column: Editorial Copy */}
-          <div className="lg:col-span-6 flex flex-col gap-6 lg:pl-10">
-            <span className="text-xs font-bold tracking-[6px] text-bluebird uppercase block">
-              {t('about.subtitle')}
-            </span>
-            <h2 className="font-display font-bold text-4xl sm:text-5xl text-ink uppercase tracking-tight leading-tight">
-              A COZY <span className="text-accent">LIVING ROOM</span> <br />
-              FOR JAZZ LOVERS
-            </h2>
-            <div className="h-[2px] bg-accent w-20 my-4"></div>
-            
-            <p className="text-sm text-ink-muted leading-relaxed font-light mt-2">
-              {t('about.p2')}
-            </p>
-            
-            <p className="text-sm text-ink-muted leading-relaxed font-light">
-              Unlike commercial venues, Bluebird is an intimate space hidden on the 3rd floor in Thonglor. It's a sanctuary designed for pure listening, where vinyl records and live acoustic jazz merge in warm, analog harmony.
-            </p>
+          {/* Story 2: Audiophile Tube Amplification */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Content Left (on desktop) */}
+            <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col gap-4">
+              <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">Pure Analog Path</span>
+              <h3 className="font-display font-bold text-3xl text-ink uppercase tracking-wide">
+                The Glow of Warm Tubes
+              </h3>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                Our acoustic environment is driven by custom-engineered vacuum tube amplifiers and high-end vintage audio systems. The glass filaments glow with a warm orange light as they reproduce the organic depth, breath, and spatial texture of every performance.
+              </p>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                Every detail is tuned to preserve the acoustic transients of brass instruments and double basses, allowing you to hear the micro-details of a soft brush on a snare drum or the resonance of a double bass.
+              </p>
+            </div>
 
-            <blockquote className="border-l-2 border-accent pl-6 my-4 italic text-ink text-sm leading-relaxed font-light">
-              "We believe that jazz is best experienced up close. In our nest, you're not just watching a performance—you're sharing a living room with the musicians."
-            </blockquote>
-
-            <div className="mt-4">
-              <Link 
-                href="/about" 
-                className="border border-accent text-accent hover:bg-accent hover:text-bg-deep py-3.5 px-8 rounded-sm text-[11px] font-bold tracking-widest uppercase transition-all duration-300 inline-block hover:-translate-y-0.5 active:translate-y-0"
-              >
-                {t('nav.about')}
-              </Link>
+            {/* Image Right */}
+            <div className="lg:col-span-6 order-1 lg:order-2 relative">
+              <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
+                <img 
+                  src="/premium_tube_amp.png" 
+                  alt="Custom Vacuum Tube Amplification" 
+                  className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="hidden md:block absolute -top-4 -right-4 w-full h-full border border-accent/10 rounded-sm pointer-events-none z-0" />
             </div>
           </div>
+
+          {/* Story 3: Crate Digging & Vinyl Heritage */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Image Left */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
+                <img 
+                  src="/premium_vinyl_turntable.png" 
+                  alt="Golden Era Vinyl Collection" 
+                  className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="hidden md:block absolute -top-4 -left-4 w-full h-full border border-accent/10 rounded-sm pointer-events-none z-0" />
+            </div>
+
+            {/* Content Right */}
+            <div className="lg:col-span-6 flex flex-col gap-4">
+              <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase">Vinyl Archives</span>
+              <h3 className="font-display font-bold text-3xl text-ink uppercase tracking-wide">
+                Original Pressings Only
+              </h3>
+              <p className="text-sm text-ink-muted leading-relaxed font-light">
+                Our physical music collection houses thousands of original vintage jazz records from the 1950s vinyl-era. We believe that digital files cannot replicate the warmth, depth, and tangible feeling of a needle tracing the grooves of a physical record.
+              </p>
+              <div className="flex gap-4.5 mt-2">
+                <Link 
+                  href="/about" 
+                  className="border border-accent text-accent hover:bg-accent hover:text-bg-deep py-3 px-6 rounded-sm text-[10px] font-bold tracking-widest uppercase transition-all duration-300"
+                >
+                  Read Our Full Story
+                </Link>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
