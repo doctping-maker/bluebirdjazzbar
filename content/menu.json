@@ -1,0 +1,88 @@
+{
+  "categories": [
+    {
+      "id": "cocktails",
+      "nameTH": "ซิกเนเจอร์และคลาสสิกค็อกเทล",
+      "nameEN": "Signature & Classic Cocktails",
+      "items": [
+        {
+          "name": "The Bluebird",
+          "tag": "Signature",
+          "descTH": "ค็อกเทลจินซิกเนเจอร์สีฟ้าสดใสจากบลูคูราโซและเลมอน เสิร์ฟในแก้วทรงนกนกนกอันเป็นเอกลักษณ์ รสชาติเปรี้ยวอมหวาน สดชื่นและละมุน",
+          "descEN": "Vibrant blue signature gin-based cocktail with blue curaçao and fresh lemon, served in our iconic signature bird glass. Crisp, citrusy, and refreshing.",
+          "price": "320"
+        },
+        {
+          "name": "Old Fashioned",
+          "tag": "Classic",
+          "descTH": "เหล้าเบอร์เบิน บิทเทอร์ และน้ำตาล ตกแต่งด้วยเปลือกส้มและเชอร์รี่ รสชาติเข้มข้น ดุดันแบบดั้งเดิม",
+          "descEN": "Bourbon whiskey, Angostura bitters, sugar, orange peel, and cherry. Rich, bold, and timeless.",
+          "price": "350"
+        },
+        {
+          "name": "Thonglor Sunset",
+          "tag": "Signature",
+          "descTH": "เหล้ารัมคัดสรร น้ำสับปะรด น้ำส้มมะนาว และไซรัปทับทิม ให้ความรู้สึกถึงพระอาทิตย์อัสดงย่านทองหล่อ",
+          "descEN": "Premium rum, pineapple juice, lime juice, and grenadine syrup. Capturing the warm hues of a Thonglor sunset.",
+          "price": "340"
+        }
+      ]
+    },
+    {
+      "id": "beers",
+      "nameTH": "คราฟต์เบียร์และเครื่องดื่มอื่นๆ",
+      "nameEN": "Craft Beers & Other Spirits",
+      "items": [
+        {
+          "name": "Local Craft Beer (Tap / Bottle)",
+          "tag": "Select",
+          "descTH": "คราฟต์เบียร์ไทยและเบียร์นำเข้าคัดพิเศษ (โปรดสอบถามตารางเบียร์สดรายวันจากบาร์เทนเดอร์)",
+          "descEN": "Selection of local Thai craft beers and imported bottles. Please ask our bartender for today's draft tap rotation.",
+          "price": "220 - 280"
+        },
+        {
+          "name": "House Wine (Red / White)",
+          "tag": "Wine",
+          "descTH": "ไวน์แดงหรือไวน์ขาวรสสัมผัสดี คัดสรรมาเพื่อทานคู่ดนตรีแจ๊สโดยเฉพาะ",
+          "descEN": "Carefully selected premium house red or white wine, curated to pair perfectly with live jazz acoustics.",
+          "price": "320 / Glass"
+        },
+        {
+          "name": "Single Malt Scotch Whisky",
+          "tag": "Spirits",
+          "descTH": "วิสกี้ชั้นเลิศจากเขตสก็อตแลนด์ เสิร์ฟแบบ On the rock หรือ Neat",
+          "descEN": "Fine selection of premium single malts. Served neat, on the rocks, or with water.",
+          "price": "380 - 450"
+        }
+      ]
+    },
+    {
+      "id": "bites",
+      "nameTH": "อาหารว่างและกับแกล้ม",
+      "nameEN": "Light Bites & Bar Snacks",
+      "items": [
+        {
+          "name": "Truffle French Fries",
+          "tag": "Snack",
+          "descTH": "มันฝรั่งทอดร้อนๆ คลุกเคล้าน้ำมันทรัฟเฟิลขาวเข้มข้น โรยชีสพาร์เมซานและพาร์สลีย์",
+          "descEN": "Crispy golden French fries tossed in aromatic white truffle oil, finished with grated parmesan cheese and fresh parsley.",
+          "price": "220"
+        },
+        {
+          "name": "Crispy Gyoza with Spicy Mayo",
+          "tag": "Snack",
+          "descTH": "เกี๊ยวซ่าหมูทอดกรอบเสิร์ฟคู่ซอสสไปซี่มาโยรสเผ็ดกำลังดี",
+          "descEN": "Crispy pan-fried pork gyoza dumplings, served with our signature spicy sriracha mayonnaise dipping sauce.",
+          "price": "180"
+        },
+        {
+          "name": "Mixed Cold Cuts & Cheese Platter",
+          "tag": "Platter",
+          "descTH": "โคลคัทและชีสพรีเมียม เสิร์ฟพร้อมถั่ว มะกอก และแครกเกอร์กรอบ",
+          "descEN": "A selection of premium cured meats and cheeses, served with olives, mixed nuts, and dry crackers.",
+          "price": "450"
+        }
+      ]
+    }
+  ]
+}

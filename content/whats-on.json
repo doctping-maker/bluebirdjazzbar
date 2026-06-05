@@ -1,0 +1,58 @@
+{
+  "coverCharge": "โปรดสอบถาม ณ จุดบริการ (Please Inquire at Entrance)",
+  "jamSessionInfo": {
+    "day": "วันพุธ (Wednesday)",
+    "time": "21:00 น. เป็นต้นไป (9:00 PM onwards)",
+    "description": "Guest Jam Sessions - ยินดีต้อนรับนักดนตรีและคนรักแจ๊สทุกท่านร่วมแจมดนตรีบนเวที / Everyone is welcome to join our open stage jam session."
+  },
+  "lineup": [
+    {
+      "id": "show-1",
+      "date": "Jun 06",
+      "dayName": "Sat",
+      "artist": "Sunny Trio & Friends",
+      "genre": "Bossa & Modern Jazz",
+      "time": "20:30"
+    },
+    {
+      "id": "show-2",
+      "date": "Jun 07",
+      "dayName": "Sun",
+      "artist": "Mellow Motif",
+      "genre": "Vocal Jazz / Swing",
+      "time": "20:00"
+    },
+    {
+      "id": "show-3",
+      "date": "Jun 08",
+      "dayName": "Mon",
+      "artist": "Bangkok Bebop Society",
+      "genre": "Classic Bebop",
+      "time": "20:30"
+    },
+    {
+      "id": "show-4",
+      "date": "Jun 10",
+      "dayName": "Wed",
+      "artist": "Trix 'O' Treat",
+      "genre": "Gypsy Jazz & Swing",
+      "time": "21:00"
+    },
+    {
+      "id": "show-5",
+      "date": "Jun 11",
+      "dayName": "Thu",
+      "artist": "Pomme & Swing Cats",
+      "genre": "Hot Club Swing",
+      "time": "20:30"
+    },
+    {
+      "id": "show-6",
+      "date": "Jun 12",
+      "dayName": "Fri",
+      "artist": "Bluebird Jam Night",
+      "genre": "Open Jam Session",
+      "time": "21:00"
+    }
+  ]
+}
