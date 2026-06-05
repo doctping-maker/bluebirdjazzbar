@@ -27,33 +27,61 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 44 }) => {
           </linearGradient>
         </defs>
 
-        {/* Bird mark: original geometric bluebird in flight over a vinyl arc */}
+        {/* Bird mark: Bluebird holding a vinyl record and a saxophone (Official Brand Concept) */}
         <g transform="translate(260,66)">
-          {/* vinyl arc / brass */}
+          {/* Vinyl Record */}
+          <g transform="translate(-40, 10)">
+            <circle cx="0" cy="0" r="30" fill="#151A22" stroke="#C9A24B" strokeWidth="1.5" opacity="0.95"/>
+            <circle cx="0" cy="0" r="22" fill="none" stroke="#253246" strokeWidth="0.5"/>
+            <circle cx="0" cy="0" r="15" fill="none" stroke="#253246" strokeWidth="0.5"/>
+            <circle cx="0" cy="0" r="8" fill="#C9A24B"/>
+            <circle cx="0" cy="0" r="2" fill="#0A1828"/>
+          </g>
+
+          {/* Saxophone */}
+          <g>
+            <path 
+              d="M 22 -6 C 18 -6, 12 -4, 12 12 C 12 28, 20 38, 35 38 C 48 38, 54 26, 54 15 M 54 15 C 54 8, 48 4, 44 4" 
+              fill="none" 
+              stroke="#C9A24B" 
+              strokeWidth="4.5" 
+              strokeLinecap="round"
+            />
+            <path d="M 54 15 C 56 12, 60 10, 66 10 C 66 22, 60 22, 54 15 Z" fill="#C9A24B"/>
+            <circle cx="15" cy="18" r="2" fill="#F4EFE6" stroke="#C9A24B" strokeWidth="0.75"/>
+            <circle cx="20" cy="26" r="2" fill="#F4EFE6" stroke="#C9A24B" strokeWidth="0.75"/>
+            <circle cx="28" cy="32" r="2" fill="#F4EFE6" stroke="#C9A24B" strokeWidth="0.75"/>
+          </g>
+
+          {/* Bluebird Body */}
           <path 
-            d="M -78 28 A 78 78 0 0 1 78 28" 
-            fill="none" 
-            stroke="#C9A24B" 
-            strokeWidth="3" 
-            strokeLinecap="round" 
-            opacity="0.85"
-          />
-          <circle cx="0" cy="28" r="4" fill="#C9A24B"/>
-          {/* body */}
-          <path 
-            d="M 0 -34 C 20 -34, 34 -20, 34 0 C 34 14, 24 24, 8 26 C 26 16, 22 -2, 4 -6 C 18 4, 10 18, -6 18 C -26 18, -38 4, -34 -12 C -30 -2, -16 0, -8 -8 C -18 -16, -14 -30, 0 -34 Z" 
+            d="M -25 -20 C -10 -35, 15 -35, 25 -20 C 35 -5, 30 15, 15 25 C 0 30, -20 25, -28 10 C -32 -2, -32 -12, -25 -20 Z" 
             fill="url(#bird-gradient)"
           />
-          {/* wing accent */}
+          {/* Belly */}
           <path 
-            d="M -2 -10 C 12 -8, 18 2, 14 12 C 8 2, -2 0, -2 -10 Z" 
-            fill="#0A1828" 
-            opacity="0.25"
+            d="M -15 22 C -2 22, 10 15, 15 5 C 10 -5, -2 -10, -15 2 C -20 10, -20 18, -15 22 Z" 
+            fill="#3FA7D6" 
+            opacity="0.7"
           />
-          {/* eye */}
-          <circle cx="20" cy="-12" r="2.4" fill="#0A1828"/>
-          {/* beak */}
-          <path d="M 34 -8 L 46 -4 L 34 0 Z" fill="#C9A24B"/>
+          {/* Beak */}
+          <path d="M 24 -15 L 36 -12 L 25 -6 Z" fill="#C9A24B"/>
+          {/* Eye */}
+          <path d="M 12 -18 Q 16 -22, 20 -18" fill="none" stroke="#0A1828" strokeWidth="2.5" strokeLinecap="round"/>
+          {/* Wing */}
+          <path 
+            d="M -10 -15 C -25 -10, -28 15, -15 15 C -8 15, -2 -5, -10 -15 Z" 
+            fill="#1E6FA8" 
+            opacity="0.9"
+          />
+          {/* Tail */}
+          <path 
+            d="M -28 5 C -38 12, -42 8, -45 15 C -38 15, -34 10, -28 5 Z" 
+            fill="url(#bird-gradient)"
+          />
+          {/* Feet */}
+          <path d="M -20 20 L -30 25 M -20 20 L -25 28" stroke="#C9A24B" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M 5 22 L 12 28 M 5 22 L 6 30" stroke="#C9A24B" strokeWidth="2" strokeLinecap="round"/>
         </g>
 
         {/* Wordmark */}
