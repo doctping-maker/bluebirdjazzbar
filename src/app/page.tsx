@@ -6,7 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 import weeklyLineup from '../../content/whats-on.json';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   
   // Get tonight's show (first item in the lineup)
   const tonightShow = weeklyLineup.lineup[0];
@@ -108,6 +108,54 @@ export default function Home() {
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Welcome Mascot Banner Section */}
+      <section className="relative py-16 px-6 md:px-[8%] bg-bg-panel border-b border-line overflow-hidden">
+        {/* Decorative background glow */}
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-bluebird/10 rounded-full blur-3xl pointer-events-none z-0" />
+        
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
+          {/* Mascot 3D Image (Left) */}
+          <div className="md:col-span-5 flex justify-center">
+            <div className="relative aspect-square w-full max-w-[300px] rounded-full border-4 border-accent/20 shadow-2xl overflow-hidden bg-bg-deep/80 hover:scale-[1.03] transition-transform duration-500 group">
+              <img 
+                src="/mascot_3d_welcome.png" 
+                alt="3D Bluebird Mascot Welcoming You" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+          
+          {/* Welcome Text (Right) */}
+          <div className="md:col-span-7 flex flex-col items-start text-left gap-4">
+            <span className="bg-accent/10 border border-accent/30 text-accent font-bold text-[10px] tracking-[4px] uppercase py-1.5 px-4 rounded-full">
+              {language === 'th' ? 'ยินดีต้อนรับสู่รังของเรา' : 'Welcome to the Nest'}
+            </span>
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-ink uppercase tracking-wide leading-tight">
+              {language === 'th' ? 'สวัสดีครับ! ผมนกฟ้าบลูเบิร์ด ยินดีต้อนรับครับ' : 'Hello! I am the Bluebird. Welcome to our sanctuary.'}
+            </h2>
+            <p className="text-sm text-ink-muted leading-relaxed font-light">
+              {language === 'th' 
+                ? 'ยินดีต้อนรับนักรักเสียงเพลงทุกท่านเข้าสู่ห้องนั่งเล่นดนตรีแจ๊สของพวกเรา ที่ซ่อนตัวอยู่ชั้น 3 ย่านทองหล่อครับ! ที่นี่เรามีดนตรีแจ๊สสดอะคูสติก แผ่นเสียงไวนิลคลาสสิกออริจินัล และค็อกเทลสูตรพิเศษรอคุณอยู่ มานั่งฟังดนตรีแบบเป็นกันเองและอบอุ่นไปด้วยกันนะครับ!'
+                : 'Welcome to our cozy jazz sanctuary hidden on the 3rd floor in Thonglor. I am here to spin vintage vinyl records, introduce you to world-class live acoustics, and serve our signature cocktails. Make yourself at home in our musical nest!'}
+            </p>
+            <div className="flex flex-wrap gap-4 mt-2">
+              <Link 
+                href="/visit#reserve-form-section" 
+                className="bg-accent text-bg-deep hover:bg-transparent hover:text-accent border border-accent font-bold text-[10px] uppercase tracking-widest py-3 px-6 rounded-sm transition-all duration-300 shadow-md"
+              >
+                {t('nav.book')}
+              </Link>
+              <Link 
+                href="/about" 
+                className="border border-line hover:border-accent text-ink hover:bg-accent/5 font-bold text-[10px] uppercase tracking-widest py-3 px-6 rounded-sm transition-all duration-300"
+              >
+                {t('nav.about')}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

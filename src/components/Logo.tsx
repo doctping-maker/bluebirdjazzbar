@@ -18,7 +18,11 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 52 }) => {
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-label="Bluebird Jazz Bar logo"
+        textRendering="geometricPrecision"
+        shapeRendering="geometricPrecision"
+        imageRendering="optimizeQuality"
         className="select-none transition-transform duration-300 hover:scale-[1.03]"
+        style={{ transform: 'translate3d(0, 0, 0)' }}
       >
         <defs>
           <linearGradient id="bird-body-gradient" x1="0" y1="0" x2="0" y2="1">
@@ -31,16 +35,15 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 52 }) => {
           <path id="bluebird-arc" d="M 100 80 A 185 185 0 0 1 420 80" fill="none" />
           <path id="jazzbar-arc" d="M 160 102 A 200 200 0 0 1 360 102" fill="none" />
         </defs>
-
+ 
         {/* 1. Curved Wordmarks (Top Arch) */}
         {/* Thai Text */}
         <text 
-          fontFamily="'Inter', sans-serif" 
+          fontFamily="'IBM Plex Sans Thai', sans-serif" 
           fontSize="14.5" 
-          fontWeight="400"
+          fontWeight="600"
           letterSpacing="2.5"
           fill="#F4EFE6"
-          opacity="0.85"
         >
           <textPath href="#thai-arc" startOffset="50%" textAnchor="middle">
             บลูเบิร์ดแจ๊สบาร์
