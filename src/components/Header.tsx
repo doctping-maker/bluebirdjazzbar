@@ -53,8 +53,8 @@ export const Header: React.FC = () => {
       }`}
     >
       {/* Brand logo */}
-      <Link href="/" className="transition-transform duration-300">
-        <Logo size={isScrolled ? 56 : 76} />
+      <Link href="/" className="transition-all duration-300 block">
+        <Logo size={isScrolled ? 46 : 64} className="w-[46px] h-[46px] md:w-[64px] md:h-[64px] transition-all duration-300" />
       </Link>
 
       {/* Desktop Navigation */}
