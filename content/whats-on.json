@@ -2,57 +2,234 @@
   "coverCharge": "โปรดสอบถาม ณ จุดบริการ (Please Inquire at Entrance)",
   "jamSessionInfo": {
     "day": "วันพุธ (Wednesday)",
-    "time": "21:00 น. เป็นต้นไป (9:00 PM onwards)",
+    "time": "19:30 น. เป็นต้นไป (7:30 PM onwards)",
     "description": "Guest Jam Sessions - ยินดีต้อนรับนักดนตรีและคนรักแจ๊สทุกท่านร่วมแจมดนตรีบนเวที / Everyone is welcome to join our open stage jam session."
   },
   "lineup": [
     {
       "id": "show-1",
-      "date": "Jun 06",
-      "dayName": "Sat",
-      "artist": "Sunny Trio & Friends",
-      "genre": "Bossa & Modern Jazz",
-      "time": "20:30"
+      "date": "Jun 01",
+      "dayName": "Mon",
+      "artist": "Sararn x Misc.Strings",
+      "price": "499",
+      "status": "FULLY BOOKED",
+      "time": "19:30"
     },
     {
       "id": "show-2",
-      "date": "Jun 07",
-      "dayName": "Sun",
-      "artist": "Mellow Motif",
-      "genre": "Vocal Jazz / Swing",
-      "time": "20:00"
+      "date": "Jun 03",
+      "dayName": "Wed",
+      "artist": "Sunset Serenades, Maleek & Friends",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
     },
     {
       "id": "show-3",
-      "date": "Jun 08",
-      "dayName": "Mon",
-      "artist": "Bangkok Bebop Society",
-      "genre": "Classic Bebop",
-      "time": "20:30"
+      "date": "Jun 04",
+      "dayName": "Thu",
+      "artist": "Jaeil Ji & The Jazz Cats, Korea",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
     },
     {
       "id": "show-4",
-      "date": "Jun 10",
-      "dayName": "Wed",
-      "artist": "Trix 'O' Treat",
-      "genre": "Gypsy Jazz & Swing",
-      "time": "21:00"
+      "date": "Jun 05",
+      "dayName": "Fri",
+      "artist": "Uncle Tum & The Nieces",
+      "price": "300",
+      "status": "Fly-yayy Jam Session",
+      "time": "19:30"
     },
     {
       "id": "show-5",
-      "date": "Jun 11",
-      "dayName": "Thu",
-      "artist": "Pomme & Swing Cats",
-      "genre": "Hot Club Swing",
-      "time": "20:30"
+      "date": "Jun 06",
+      "dayName": "Sat",
+      "artist": "J-Pop & Anisong Night, V1",
+      "price": "350",
+      "status": "FULLY BOOKED",
+      "time": "19:30"
     },
     {
       "id": "show-6",
+      "date": "Jun 07",
+      "dayName": "Sun",
+      "artist": "The B3 Syndicate Organ Trio, Ghostkeys",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-7",
+      "date": "Jun 08",
+      "dayName": "Mon",
+      "artist": "Reggae meets Jazz",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-8",
+      "date": "Jun 10",
+      "dayName": "Wed",
+      "artist": "น้าอุ้ยกะลุงตุ้ย x Monotone",
+      "price": "390",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-9",
+      "date": "Jun 11",
+      "dayName": "Thu",
+      "artist": "Reimagined Thai Sweet Songs, Noon",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-10",
       "date": "Jun 12",
       "dayName": "Fri",
-      "artist": "Bluebird Jam Night",
-      "genre": "Open Jam Session",
-      "time": "21:00"
+      "artist": "Uncle Tum & The Nieces",
+      "price": "300",
+      "status": "Fly-yayy Jam Session",
+      "time": "19:30"
+    },
+    {
+      "id": "show-11",
+      "date": "Jun 13",
+      "dayName": "Sat",
+      "artist": "Dikon Poptet",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-12",
+      "date": "Jun 14",
+      "dayName": "Sun",
+      "artist": "Olivia Rodrigo Tribute, Mook Resnusa",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-13",
+      "date": "Jun 15",
+      "dayName": "Mon",
+      "artist": "Pop Goes Swing, Penny & The Cats",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-14",
+      "date": "Jun 17",
+      "dayName": "Wed",
+      "artist": "Sararn",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-15",
+      "date": "Jun 18",
+      "dayName": "Thu",
+      "artist": "Jazz/Pop Night, Non & Tip",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-16",
+      "date": "Jun 19",
+      "dayName": "Fri",
+      "artist": "Uncle Tum & The Nieces",
+      "price": "300",
+      "status": "Fly-yayy Jam Session",
+      "time": "19:30"
+    },
+    {
+      "id": "show-17",
+      "date": "Jun 20",
+      "dayName": "Sat",
+      "artist": "Jazz Night with Damon Brown",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-18",
+      "date": "Jun 21",
+      "dayName": "Sun",
+      "artist": "Pond Stumblrs",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-19",
+      "date": "Jun 22",
+      "dayName": "Mon",
+      "artist": "Laufey tribute, Dream",
+      "price": "350",
+      "status": "Starts at 8:30 PM",
+      "time": "20:30"
+    },
+    {
+      "id": "show-20",
+      "date": "Jun 24",
+      "dayName": "Wed",
+      "artist": "Parames",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-21",
+      "date": "Jun 25",
+      "dayName": "Thu",
+      "artist": "Khaenika",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-22",
+      "date": "Jun 26",
+      "dayName": "Fri",
+      "artist": "Uncle Tum & The Nieces",
+      "price": "300",
+      "status": "Fly-yayy Jam Session",
+      "time": "19:30"
+    },
+    {
+      "id": "show-23",
+      "date": "Jun 27",
+      "dayName": "Sat",
+      "artist": "Sr",
+      "price": "",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-24",
+      "date": "Jun 28",
+      "dayName": "Sun",
+      "artist": "Sunday Karaoke of the Month",
+      "price": "FREE",
+      "status": "",
+      "time": "19:30"
+    },
+    {
+      "id": "show-25",
+      "date": "Jun 29",
+      "dayName": "Mon",
+      "artist": "Tales Time Duet Songs, Pax",
+      "price": "300",
+      "status": "",
+      "time": "19:30"
     }
   ]
 }

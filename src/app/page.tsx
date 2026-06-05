@@ -85,9 +85,26 @@ export default function Home() {
                 <h3 className="font-display font-bold text-3xl sm:text-4xl text-ink uppercase tracking-wide leading-tight mb-4 group-hover:text-accent transition-colors duration-300">
                   {tonightShow.artist}
                 </h3>
-                <span className="inline-block text-[9px] font-bold tracking-[3px] text-accent border border-accent/30 rounded-full px-4 py-1.5 uppercase mb-8">
-                  {tonightShow.genre}
-                </span>
+                <div className="flex flex-wrap items-center gap-2.5 mb-8">
+                  {tonightShow.price ? (
+                    <span className="inline-block text-[9px] font-bold tracking-[2px] text-accent border border-accent/30 rounded-full px-4 py-1.5 uppercase bg-accent/5">
+                      Cover: {tonightShow.price === 'FREE' ? 'FREE' : `${tonightShow.price} THB`}
+                    </span>
+                  ) : (
+                    <span className="inline-block text-[9px] font-bold tracking-[2px] text-ink-muted border border-line rounded-full px-4 py-1.5 uppercase bg-bg-panel/10">
+                      Cover: Inquire
+                    </span>
+                  )}
+                  {tonightShow.status && (
+                    <span className={`inline-block text-[9px] font-bold tracking-[2px] rounded-full px-4 py-1.5 uppercase ${
+                      tonightShow.status === 'FULLY BOOKED' 
+                        ? 'bg-red-500/20 text-red-400 border border-red-500/30' 
+                        : 'bg-bluebird/20 text-bluebird border border-bluebird/30'
+                    }`}>
+                      {tonightShow.status}
+                    </span>
+                  )}
+                </div>
                 
                 <p className="text-[13px] text-ink-muted leading-relaxed font-light mb-8 border-l border-accent/20 pl-4 italic">
                   "Every night, we pay homage to the classic recordings of the vinyl era. Experience authentic live jazz standards in a cozy third-floor room."
@@ -95,8 +112,8 @@ export default function Home() {
 
                 <div className="flex items-center justify-between border-t border-line/10 pt-6">
                   <div className="flex flex-col">
-                    <span className="text-[9px] text-ink-muted/60 uppercase tracking-widest">Cover Charge</span>
-                    <span className="text-xs text-accent font-semibold">{weeklyLineup.coverCharge}</span>
+                    <span className="text-[9px] text-ink-muted/60 uppercase tracking-widest">Show Time</span>
+                    <span className="text-xs text-accent font-semibold">{tonightShow.time} PM</span>
                   </div>
                   <Link 
                     href="/visit#reserve-form-section" 
@@ -207,21 +224,47 @@ export default function Home() {
                 {/* Show Details */}
                 <div className="flex-grow">
                   <span className="text-[10px] text-bluebird font-bold tracking-widest uppercase block mb-1">
-                    {show.time} PM · {show.genre}
+                    {show.time} PM · Live Music
                   </span>
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-ink uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-ink uppercase tracking-wide group-hover:text-accent transition-colors duration-300 mb-2">
                     {show.artist}
                   </h3>
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    {show.price ? (
+                      <span className="text-[9px] font-bold text-accent border border-accent/20 rounded-full px-2.5 py-0.5 bg-accent/5">
+                        {language === 'th' ? 'ค่าเข้าชม: ' : 'Ticket: '}{show.price === 'FREE' ? 'FREE' : `${show.price} THB`}
+                      </span>
+                    ) : (
+                      <span className="text-[9px] font-bold text-ink-muted border border-line rounded-full px-2.5 py-0.5 bg-bg-panel/10">
+                        {language === 'th' ? 'ค่าเข้าชม: สอบถามที่ร้าน' : 'Ticket: Inquire'}
+                      </span>
+                    )}
+                    {show.status && (
+                      <span className={`text-[9px] font-bold rounded-full px-2.5 py-0.5 ${
+                        show.status === 'FULLY BOOKED' 
+                          ? 'bg-red-500/20 text-red-400 border border-red-500/30' 
+                          : 'bg-bluebird/20 text-bluebird border border-bluebird/30'
+                      }`}>
+                        {show.status}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Action button */}
                 <div className="min-w-[130px] text-right">
-                  <Link 
-                    href="/visit#reserve-form-section" 
-                    className="border border-line/50 text-ink group-hover:bg-accent group-hover:text-bg-deep group-hover:border-accent font-bold text-[10px] tracking-widest uppercase py-3 px-6 rounded-sm transition-all duration-300 inline-block"
-                  >
-                    Reserve Table
-                  </Link>
+                  {show.status === 'FULLY BOOKED' ? (
+                    <span className="border border-red-500/20 bg-red-500/5 text-red-400/60 font-bold text-[9px] tracking-widest uppercase py-3 px-6 rounded-sm inline-block cursor-not-allowed select-none">
+                      Fully Booked
+                    </span>
+                  ) : (
+                    <Link 
+                      href="/visit#reserve-form-section" 
+                      className="border border-line/50 text-ink group-hover:bg-accent group-hover:text-bg-deep group-hover:border-accent font-bold text-[10px] tracking-widest uppercase py-3 px-6 rounded-sm transition-all duration-300 inline-block"
+                    >
+                      Reserve Table
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}

@@ -56,19 +56,42 @@ export default function WhatsOn() {
                 <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
                   {show.artist}
                 </h3>
-                <p className="text-[13px] text-ink-muted/80 font-light leading-relaxed mt-2 uppercase tracking-wider text-[11px]">
-                  Genre: <span className="text-ink">{show.genre}</span>
-                </p>
+                <div className="flex flex-wrap items-center gap-2.5 mt-3">
+                  {show.price ? (
+                    <span className="text-[10px] font-bold text-accent border border-accent/30 rounded-full px-3 py-1 bg-accent/5">
+                      {show.price === 'FREE' ? 'FREE' : `${show.price} THB`}
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-bold text-ink-muted border border-line rounded-full px-3 py-1 bg-bg-panel/10">
+                      Inquire Entry
+                    </span>
+                  )}
+                  {show.status && (
+                    <span className={`text-[10px] font-bold rounded-full px-3 py-1 ${
+                      show.status === 'FULLY BOOKED' 
+                        ? 'bg-red-500/20 text-red-400 border border-red-500/30' 
+                        : 'bg-bluebird/20 text-bluebird border border-bluebird/30'
+                    }`}>
+                      {show.status}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Action booking */}
               <div className="min-w-[150px] text-left md:text-right">
-                <Link 
-                  href="/visit#reserve-form-section"
-                  className="bg-accent/10 text-accent hover:bg-accent hover:text-bg-deep border border-accent/25 font-bold text-[10px] tracking-widest uppercase py-3.5 px-8 rounded-sm transition-all duration-300 inline-block shadow-md"
-                >
-                  Book Seat
-                </Link>
+                {show.status === 'FULLY BOOKED' ? (
+                  <span className="border border-red-500/30 bg-red-500/5 text-red-400/70 font-bold text-[10px] tracking-widest uppercase py-3.5 px-8 rounded-sm inline-block cursor-not-allowed select-none">
+                    Fully Booked
+                  </span>
+                ) : (
+                  <Link 
+                    href="/visit#reserve-form-section"
+                    className="bg-accent/10 text-accent hover:bg-accent hover:text-bg-deep border border-accent/25 font-bold text-[10px] tracking-widest uppercase py-3.5 px-8 rounded-sm transition-all duration-300 inline-block shadow-md"
+                  >
+                    Book Seat
+                  </Link>
+                )}
               </div>
             </div>
           ))}
