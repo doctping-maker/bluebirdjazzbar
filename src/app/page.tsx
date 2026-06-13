@@ -8,8 +8,79 @@ import weeklyLineup from '../../content/whats-on.json';
 export default function Home() {
   const { language, t } = useLanguage();
   
-  // Get tonight's show (first item in the lineup)
-  const tonightShow = weeklyLineup.lineup[0];
+  // Resolve tonight's show dynamically based on Asia/Bangkok time
+  const [showCard, setShowCard] = React.useState<{
+    type: 'tonight' | 'next' | 'closed';
+    date?: string;
+    dayName?: string;
+    artist?: string;
+    price?: string;
+    status?: string;
+    time?: string;
+  } | null>(null);
+
+  React.useEffect(() => {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Bangkok",
+      month: "short",
+      day: "2-digit",
+      weekday: "long"
+    });
+    const parts = formatter.formatToParts(new Date());
+    const month = parts.find(p => p.type === "month")?.value || "";
+    const day = parts.find(p => p.type === "day")?.value || "";
+    const weekday = parts.find(p => p.type === "weekday")?.value || "";
+    const todayDateStr = `${month} ${day}`; // e.g. "Jun 14"
+
+    setTimeout(() => {
+      if (weekday === "Tuesday") {
+        setShowCard({ type: 'closed' });
+      } else {
+        const todayShow = weeklyLineup.lineup.find(s => s.date === todayDateStr);
+        if (todayShow) {
+          setShowCard({
+            type: 'tonight',
+            date: todayShow.date,
+            dayName: todayShow.dayName,
+            artist: todayShow.artist,
+            price: todayShow.price,
+            status: todayShow.status,
+            time: todayShow.time
+          });
+        } else {
+          // Find the next show chronologically.
+          const todayDayNum = parseInt(day, 10);
+          const nextShow = weeklyLineup.lineup.find(s => {
+            const showDayNum = parseInt(s.date.split(' ')[1], 10);
+            return showDayNum > todayDayNum;
+          });
+
+          if (nextShow) {
+            setShowCard({
+              type: 'next',
+              date: nextShow.date,
+              dayName: nextShow.dayName,
+              artist: nextShow.artist,
+              price: nextShow.price,
+              status: nextShow.status,
+              time: nextShow.time
+            });
+          } else {
+            // Fallback to first show
+            setShowCard({
+              type: 'next',
+              date: weeklyLineup.lineup[0].date,
+              dayName: weeklyLineup.lineup[0].dayName,
+              artist: weeklyLineup.lineup[0].artist,
+              price: weeklyLineup.lineup[0].price,
+              status: weeklyLineup.lineup[0].status,
+              time: weeklyLineup.lineup[0].time
+            });
+          }
+        }
+      }
+    }, 0);
+  }, []);
 
   return (
     <div className="flex flex-col w-full animate-fade-in-up">
@@ -19,8 +90,8 @@ export default function Home() {
         {/* Full-bleed background image with heavy vintage styling */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/premium_bar_hero.png" 
-            alt="Bluebird Live" 
+            src="/hero-real.jpg" 
+            alt="บรรยากาศทางเข้าและเวทีเล่นดนตรีแจ๊สของร้าน Bluebird" 
             className="w-full h-full object-cover opacity-45 scale-105 filter contrast-110 brightness-[0.6] transition-all duration-700"
           />
           {/* Gradients to blend into dark background */}
@@ -44,7 +115,7 @@ export default function Home() {
             </h1>
             
             <p className="font-display italic text-xl sm:text-3xl text-ink-muted font-light tracking-wide max-w-xl mb-10 leading-relaxed">
-              "{t('hero.tagline')}"
+              &ldquo;{t('hero.tagline')}&rdquo;
             </p>
 
             <div className="flex flex-wrap gap-5">
@@ -64,64 +135,87 @@ export default function Home() {
           </div>
 
           {/* Right Column: Tonight's Spotlight Poster Card */}
-          {tonightShow && (
+          {showCard && (
             <div className="lg:col-span-5 bg-bg-panel/40 backdrop-blur-md border border-accent/20 p-8 sm:p-10 rounded-sm relative overflow-hidden shadow-2xl hover:border-accent/40 transition-all duration-500 group">
               {/* Decorative vintage borders */}
               <div className="absolute top-4 left-4 right-4 bottom-4 border border-accent/5 pointer-events-none" />
               
               <div className="flex justify-between items-start mb-8 relative z-10">
                 <span className="bg-accent/10 border border-accent/30 text-accent font-bold text-[9px] tracking-[4px] uppercase py-1.5 px-4 rounded-full">
-                  TONIGHT
+                  {showCard.type === 'closed'
+                    ? (language === 'th' ? 'ปิดทำการ' : 'CLOSED')
+                    : showCard.type === 'next'
+                      ? (language === 'th' ? 'โชว์ถัดไป' : 'NEXT SHOW')
+                      : (language === 'th' ? 'คืนนี้' : 'TONIGHT')}
                 </span>
-                <span className="text-[10px] text-ink-muted/70 tracking-widest uppercase">
-                  {tonightShow.time} PM
-                </span>
+                {showCard.time && (
+                  <span className="text-[10px] text-ink-muted/70 tracking-widest uppercase">
+                    {showCard.time} PM
+                  </span>
+                )}
               </div>
 
               <div className="relative z-10">
-                <span className="text-[11px] font-bold text-bluebird tracking-widest uppercase block mb-3">
-                  {tonightShow.date} · {tonightShow.dayName}
-                </span>
-                <h3 className="font-display font-bold text-3xl sm:text-4xl text-ink uppercase tracking-wide leading-tight mb-4 group-hover:text-accent transition-colors duration-300">
-                  {tonightShow.artist}
-                </h3>
-                <div className="flex flex-wrap items-center gap-2.5 mb-8">
-                  {tonightShow.price ? (
-                    <span className="inline-block text-[9px] font-bold tracking-[2px] text-accent border border-accent/30 rounded-full px-4 py-1.5 uppercase bg-accent/5">
-                      Cover: {tonightShow.price === 'FREE' ? 'FREE' : `${tonightShow.price} THB`}
-                    </span>
-                  ) : (
-                    <span className="inline-block text-[9px] font-bold tracking-[2px] text-ink-muted border border-line rounded-full px-4 py-1.5 uppercase bg-bg-panel/10">
-                      Cover: Inquire
-                    </span>
-                  )}
-                  {tonightShow.status && (
-                    <span className={`inline-block text-[9px] font-bold tracking-[2px] rounded-full px-4 py-1.5 uppercase ${
-                      tonightShow.status === 'FULLY BOOKED' 
-                        ? 'bg-red-500/20 text-red-400 border border-red-500/30' 
-                        : 'bg-bluebird/20 text-bluebird border border-bluebird/30'
-                    }`}>
-                      {tonightShow.status}
-                    </span>
-                  )}
-                </div>
-                
-                <p className="text-[13px] text-ink-muted leading-relaxed font-light mb-8 border-l border-accent/20 pl-4 italic">
-                  "Every night, we pay homage to the classic recordings of the vinyl era. Experience authentic live jazz standards in a cozy third-floor room."
-                </p>
-
-                <div className="flex items-center justify-between border-t border-line/10 pt-6">
-                  <div className="flex flex-col">
-                    <span className="text-[9px] text-ink-muted/60 uppercase tracking-widest">Show Time</span>
-                    <span className="text-xs text-accent font-semibold">{tonightShow.time} PM</span>
+                {showCard.type === 'closed' ? (
+                  <div className="py-6">
+                    <h3 className="font-display font-bold text-2xl text-ink uppercase tracking-wide leading-tight mb-4">
+                      {language === 'th' ? 'ปิดทำการวันอังคาร' : 'Closed on Tuesdays'}
+                    </h3>
+                    <p className="text-[13px] text-ink-muted leading-relaxed font-light">
+                      {language === 'th' ? 'พบกันใหม่วันพรุ่งนี้ครับ' : 'See you again tomorrow.'}
+                    </p>
                   </div>
-                  <Link 
-                    href="/visit#reserve-form-section" 
-                    className="text-xs font-bold text-bluebird hover:text-ink tracking-widest uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300"
-                  >
-                    Reserve Table <i className="fas fa-arrow-right text-[10px]" />
-                  </Link>
-                </div>
+                ) : (
+                  <>
+                    <span className="text-[11px] font-bold text-bluebird tracking-widest uppercase block mb-3">
+                      {showCard.date} · {showCard.dayName}
+                    </span>
+                    <h3 className="font-display font-bold text-3xl sm:text-4xl text-ink uppercase tracking-wide leading-tight mb-4 group-hover:text-accent transition-colors duration-300">
+                      {showCard.artist}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-2.5 mb-8">
+                      {showCard.price ? (
+                        <span className="inline-block text-[9px] font-bold tracking-[2px] text-accent border border-accent/30 rounded-full px-4 py-1.5 uppercase bg-accent/5">
+                          Cover: {showCard.price === 'FREE' ? 'FREE' : `${showCard.price} THB`}
+                        </span>
+                      ) : (
+                        <span className="inline-block text-[9px] font-bold tracking-[2px] text-ink-muted border border-line rounded-full px-4 py-1.5 uppercase bg-bg-panel/10">
+                          Cover: Inquire
+                        </span>
+                      )}
+                      {showCard.status && (
+                        <span className={`inline-block text-[9px] font-bold tracking-[2px] rounded-full px-4 py-1.5 uppercase ${
+                          showCard.status === 'FULLY BOOKED' 
+                            ? 'bg-red-500/20 text-red-400 border border-red-500/30' 
+                            : 'bg-bluebird/20 text-bluebird border border-bluebird/30'
+                        }`}>
+                          {showCard.status}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <p className="text-[13px] text-ink-muted leading-relaxed font-light mb-8 border-l border-accent/20 pl-4 italic">
+                      {language === 'th'
+                        ? '"เราเชื่อว่าดนตรีแจ๊สเข้าถึงได้ดีที่สุดในระยะใกล้ ที่บาร์ของเราคุณไม่ได้แค่มาดูการแสดง แต่เหมือนได้แชร์ห้องนั่งเล่นร่วมกับนักดนตรี"'
+                        : '"Every night, we pay homage to the classic recordings of the vinyl era. Experience authentic live jazz standards in a cozy third-floor room."'}
+                    </p>
+
+                    <div className="flex items-center justify-between border-t border-line/10 pt-6">
+                      <div className="flex flex-col">
+                        <span className="text-[9px] text-ink-muted/60 uppercase tracking-widest">Show Time</span>
+                        <span className="text-xs text-accent font-semibold">{showCard.time} PM</span>
+                      </div>
+                      {showCard.status !== 'FULLY BOOKED' && (
+                        <Link 
+                          href="/visit#reserve-form-section" 
+                          className="text-xs font-bold text-bluebird hover:text-ink tracking-widest uppercase flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300"
+                        >
+                          Reserve Table <i className="fas fa-arrow-right text-[10px]" />
+                        </Link>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           )}
@@ -156,7 +250,7 @@ export default function Home() {
             <p className="text-sm text-ink-muted leading-relaxed font-light">
               {language === 'th' 
                 ? 'ยินดีต้อนรับนักรักเสียงเพลงทุกท่านเข้าสู่ห้องนั่งเล่นดนตรีแจ๊สของพวกเรา ที่ซ่อนตัวอยู่ชั้น 3 ย่านทองหล่อครับ! ที่นี่เรามีดนตรีแจ๊สสดอะคูสติก แผ่นเสียงไวนิลคลาสสิกออริจินัล และค็อกเทลสูตรพิเศษรอคุณอยู่ มานั่งฟังดนตรีแบบเป็นกันเองและอบอุ่นไปด้วยกันนะครับ!'
-                : 'Welcome to our cozy jazz sanctuary hidden on the 3rd floor in Thonglor. I am here to spin vintage vinyl records, introduce you to world-class live acoustics, and serve our signature cocktails. Make yourself at home in our musical nest!'}
+                : 'Welcome to our cozy jazz sanctuary hidden on the 3rd floor in Thonglor. I am here to spin vintage vinyl records, introduce you to intimate live acoustics, and serve our signature cocktails. Make yourself at home in our musical nest!'}
             </p>
             <div className="flex flex-wrap gap-4 mt-2">
               <Link 
@@ -184,11 +278,18 @@ export default function Home() {
               {t('whatsOn.subtitle')}
             </span>
             <h2 className="font-display font-bold text-4xl sm:text-5xl text-ink uppercase tracking-tight mb-6">
-              THE WEEKLY <br />
-              <span className="text-accent">LINEUP</span>
+              {language === 'th' ? (
+                <>ตารางดนตรี <br /><span className="text-accent">ประจำสัปดาห์</span></>
+              ) : language === 'ja' ? (
+                <>今週の <br /><span className="text-accent">ラインナップ</span></>
+              ) : language === 'ko' ? (
+                <>이번 주 <br /><span className="text-accent">라인업</span></>
+              ) : (
+                <>THE WEEKLY <br /><span className="text-accent">LINEUP</span></>
+              )}
             </h2>
             <p className="text-sm text-ink-muted/80 leading-relaxed font-light mb-8 max-w-md">
-              Our venue features world-class musicians, vinyl record listening sessions, and historic jam sessions. Browse our lineup for this week.
+              Our cozy lounge features local artists, warm vinyl record sessions, and guest jam sessions. Browse our lineup for this week.
             </p>
             <div className="flex gap-4">
               <Link 
@@ -282,7 +383,15 @@ export default function Home() {
               {t('about.subtitle')}
             </span>
             <h2 className="font-display font-bold text-4xl sm:text-5xl text-ink uppercase tracking-tight leading-none mb-4">
-              THE STORIES OF <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">OUR NEST</span>
+              {language === 'th' ? (
+                <>เรื่องราวของ <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">รังเรา</span></>
+              ) : language === 'ja' ? (
+                <>私たちの <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">物語</span></>
+              ) : language === 'ko' ? (
+                <>우리 둥지의 <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">이야기</span></>
+              ) : (
+                <>THE STORIES OF <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-bluebird">OUR NEST</span></>
+              )}
             </h2>
             <div className="h-[2px] bg-accent w-20 mx-auto mt-4"></div>
           </div>
@@ -293,8 +402,8 @@ export default function Home() {
             <div className="lg:col-span-6 relative">
               <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
                 <img 
-                  src="/premium_jazz_sax.png" 
-                  alt="Bluebird Acoustic Sanctuary" 
+                  src="/musician-real.jpg" 
+                  alt="นักดนตรีเป่าแซกโซโฟนเล่นสดบนเวที" 
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -308,10 +417,10 @@ export default function Home() {
                 A Living Room for Sound
               </h3>
               <p className="text-sm text-ink-muted leading-relaxed font-light">
-                Unlike commercial venues, Bluebird is an intimate space hidden on the 3rd floor in Thonglor. It's a sanctuary designed for pure listening, where vinyl records and live acoustic jazz merge in warm, analog harmony.
+                {"Unlike commercial venues, Bluebird is an intimate space hidden on the 3rd floor in Thonglor. It's a sanctuary designed for pure listening, where vinyl records and live acoustic jazz merge in warm, analog harmony."}
               </p>
               <p className="text-sm text-ink-muted leading-relaxed font-light italic border-l-2 border-accent pl-4">
-                "We believe that jazz is best experienced up close. In our nest, you're not just watching a performance—you're sharing a living room with the musicians."
+                {"\"We believe that jazz is best experienced up close. In our nest, you're not just watching a performance—you're sharing a living room with the musicians.\""}
               </p>
             </div>
           </div>
@@ -336,8 +445,8 @@ export default function Home() {
             <div className="lg:col-span-6 order-1 lg:order-2 relative">
               <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
                 <img 
-                  src="/premium_tube_amp.png" 
-                  alt="Custom Vacuum Tube Amplification" 
+                  src="/tube-amp-real.jpg" 
+                  alt="เครื่องขยายเสียงหลอดสุญญากาศสำหรับเครื่องเสียงแอนะล็อก" 
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -351,8 +460,8 @@ export default function Home() {
             <div className="lg:col-span-6 relative">
               <div className="relative aspect-[16/10] w-full border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
                 <img 
-                  src="/premium_vinyl_turntable.png" 
-                  alt="Golden Era Vinyl Collection" 
+                  src="/vinyl-real.jpg" 
+                  alt="เครื่องเล่นแผ่นเสียงไวนิลคลาสสิกกำลังหมุน" 
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -450,8 +559,8 @@ export default function Home() {
           <div className="lg:col-span-5 order-1 lg:order-2 relative">
             <div className="relative aspect-square w-full max-w-md mx-auto border border-accent/20 shadow-2xl rounded-sm overflow-hidden z-10">
               <img 
-                src="/premium_blue_cocktail.png" 
-                alt="Bluebird Signature Cocktail" 
+                src="/cocktail-real.jpg" 
+                alt="ค็อกเทลซิกเนเจอร์ของร้านเสิร์ฟในแก้วทรงนก" 
                 className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -470,7 +579,15 @@ export default function Home() {
             {t('gallery.subtitle')}
           </span>
           <h2 className="font-display font-bold text-4xl text-ink uppercase tracking-tight mb-4">
-            VISUAL <span className="text-accent">STORIES</span>
+            {language === 'th' ? (
+              <>ภาพ <span className="text-accent">บรรยากาศ</span></>
+            ) : language === 'ja' ? (
+              <>ギャラリー <span className="text-accent">写真</span></>
+            ) : language === 'ko' ? (
+              <>갤러리 <span className="text-accent">사진</span></>
+            ) : (
+              <>VISUAL <span className="text-accent">STORIES</span></>
+            )}
           </h2>
           <p className="text-sm text-ink-muted/80 max-w-xl mx-auto font-light leading-relaxed">
             Take a look inside the nest. Experience the visual details of our live sessions, art pieces, and curated vinyl corner.
@@ -480,25 +597,25 @@ export default function Home() {
         {/* Elegant Asymmetric Grid */}
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
           <div className="md:col-span-4 aspect-square rounded-sm overflow-hidden border border-line shadow-md group relative">
-            <img src="/premium_vinyl_turntable.png" alt="Vinyl Records Turntable" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
+            <img src="/gallery-1.jpg" alt="แผ่นเสียงแจ๊สในชั้นวางคลาสสิก" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
               <span className="text-xs font-bold text-accent uppercase tracking-widest">Vinyl Archive</span>
             </div>
           </div>
           <div className="md:col-span-8 aspect-[21/10] rounded-sm overflow-hidden border border-line shadow-md group relative">
-            <img src="/premium_bar_hero.png" alt="Live Jazz Venue" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
+            <img src="/gallery-2.jpg" alt="บรรยากาศโต๊ะนั่งและนักดนตรีเล่นสด" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
               <span className="text-xs font-bold text-accent uppercase tracking-widest">Live Jazz Sanctuary</span>
             </div>
           </div>
           <div className="md:col-span-6 aspect-square md:aspect-[4/3] rounded-sm overflow-hidden border border-line shadow-md group relative">
-            <img src="/premium_bar_counter.png" alt="Premium Bar Lounge" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
+            <img src="/gallery-3.jpg" alt="เคาน์เตอร์บาร์แสงไฟสลัวบรรยากาศอบอุ่น" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
               <span className="text-xs font-bold text-accent uppercase tracking-widest">Bar Lounge &amp; Spirits</span>
             </div>
           </div>
           <div className="md:col-span-6 aspect-square md:aspect-[4/3] rounded-sm overflow-hidden border border-line shadow-md group relative">
-            <img src="/premium_blue_cocktail.png" alt="Bluebird Signature Cocktail" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
+            <img src="/gallery-4.jpg" alt="แก้วค็อกเทล Bluebird ซิกเนเจอร์สีฟ้าสดใส" className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
               <span className="text-xs font-bold text-accent uppercase tracking-widest">Signature Cocktails</span>
             </div>
@@ -523,9 +640,16 @@ export default function Home() {
             <span className="text-xs font-bold tracking-[6px] text-bluebird uppercase block">
               {t('visit.subtitle')}
             </span>
-            <h2 className="font-display font-bold text-4xl text-ink uppercase tracking-tight">
-              JOIN US IN <br />
-              <span className="text-accent">THE NEST</span>
+            <h2 className="font-display font-bold text-4xl text-ink uppercase tracking-tight animate-on-scroll">
+              {language === 'th' ? (
+                <>มาที่ <br /><span className="text-accent">รังของเรา</span></>
+              ) : language === 'ja' ? (
+                <>ネストへ <br /><span className="text-accent">お越しください</span></>
+              ) : language === 'ko' ? (
+                <>저희 <br /><span className="text-accent">둥지로 오세요</span></>
+              ) : (
+                <>JOIN US IN <br /><span className="text-accent">THE NEST</span></>
+              )}
             </h2>
             <div className="h-[2px] bg-accent w-20 my-2"></div>
             

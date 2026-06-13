@@ -51,8 +51,8 @@ export default function Drinks() {
             {/* Visual real image */}
             <div className="md:col-span-4 bg-bg-deep border border-line aspect-square rounded-sm relative flex items-center justify-center overflow-hidden z-10 shadow-lg">
               <img 
-                src="/premium_blue_cocktail.png" 
-                alt="Bluebird Signature Cocktail" 
+                src="/cocktail-real.jpg" 
+                alt="ค็อกเทลซิกเนเจอร์ของร้านเสิร์ฟในแก้วทรงนก" 
                 className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
               />
             </div>

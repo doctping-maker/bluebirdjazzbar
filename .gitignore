@@ -47,3 +47,7 @@ id_ed25519*
 deploy_key*
 deploy_config.env
 
+# Scratch files and guidelines
+scratch/
+bluebird-antigravity-brief.md
+bluebird-antigravity-master-commands.md

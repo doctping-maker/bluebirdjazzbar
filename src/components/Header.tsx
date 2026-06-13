@@ -35,9 +35,7 @@ export const Header: React.FC = () => {
     { code: 'th', label: 'ภาษาไทย', flag: 'TH' },
     { code: 'en', label: 'English', flag: 'EN' },
     { code: 'ja', label: '日本語', flag: 'JA' },
-    { code: 'ko', label: '한국어', flag: 'KO' },
-    { code: 'ru', label: 'Русский', flag: 'RU' },
-    { code: 'es', label: 'Español', flag: 'ES' }
+    { code: 'ko', label: '한국어', flag: 'KO' }
   ];
 
   const handleLinkClick = () => {

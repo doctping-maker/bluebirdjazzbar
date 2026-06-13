@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type Language = 'th' | 'en' | 'ja' | 'ko' | 'ru' | 'es';
+export type Language = 'th' | 'en' | 'ja' | 'ko';
 
 type LanguageContextType = {
   language: Language;
@@ -85,7 +85,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "กำลังเล่นแผ่นไวนิล",
     "vinyl.artist": "เซสชันไวนิลคลาสสิก",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar ทองหล่อ. สงวนลิขสิทธิ์. ออกแบบระบบตามแบบอย่าง Blue Note NYC โดยไม่คัดลอกสื่อลิขสิทธิ์",
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar ทองหล่อ. สงวนลิขสิทธิ์.",
     "mascot.title": "เบื้องหลังการออกแบบมาสคอต",
     "mascot.desc": "น้องนกบลูเบิร์ดเริ่มต้นมาจากภาพสเก็ตช์ดินสอ เพื่อสื่อความอบอุ่น เป็นกันเอง และรักในดนตรีแจ๊ส ท่วงทำนองสด และแผ่นเสียงไวนิลคลาสสิก",
     "mascot.bandTitle": "แจมเซสชันกับวงน้องนก",
@@ -167,8 +167,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "Now Spinning",
     "vinyl.artist": "Classic Vinyl Session",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. All rights reserved. Structured after Blue Note NYC; no copyrighted assets are used.",
-    "mascot.title": "Behind The Mascot Design",
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. All rights reserved.",
+    "mascot.title": "Behind the Mascot Design",
     "mascot.desc": "The Bluebird mascot started as a cozy hand-drawn pencil sketch, expressing our love for classical live jazz and vintage vinyl records.",
     "mascot.bandTitle": "Nest Jam Session",
     "mascot.bandDesc": "Our Wednesday stage is open for special jam sessions, joined by our lovely mascot band playing together.",
@@ -248,9 +248,9 @@ const translations: Record<Language, Record<string, string>> = {
     "visit.successLine": "予約詳細をコピーしました！LINEを開いてショップへ送信してください。",
 
     "vinyl.nowPlaying": "レコード再生中",
-    "vinyl.artist": "クラシックレコードセッション",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar トンロー. All rights reserved. Designed after Blue Note NYC; no copyrighted assets used.",
-    "mascot.title": "マスコットデザインの裏話",
+    "vinyl.artist": "クラシック・レコードセッション",
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar トンロー. All rights reserved.",
+    "mascot.title": "マスコットデザインの舞台裏",
     "mascot.desc": "ブルーバードのマスコットは、温かみのある手描きの鉛筆スケッチから始まり、クラシックなライブジャズとヴィンテージレコードへの愛を表現しています。",
     "mascot.bandTitle": "ネスト・ジャム・セッション",
     "mascot.bandDesc": "水曜日のステージは、マスコットバンドによる演奏を交えた特別なジャмセッションのために開放されています。",
@@ -331,177 +331,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     "vinyl.nowPlaying": "지금 재생 중",
     "vinyl.artist": "클래식 바이닐 세션",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar 통로. All rights reserved. Blue Note NYC를 벤치마킹하여 합법적으로 개발되었습니다.",
+    "vinyl.copyright": "© 2026 Bluebird Jazz Bar 통로. All rights reserved.",
     "mascot.title": "마스코트 디자인 비하인드",
     "mascot.desc": "블루버드 마스코트는 따뜻한 연필 스케치로 시작하여 클래식 라이브 재즈와 빈티지 바이닐 레코드에 대한 사랑을 표현합니다.",
     "mascot.bandTitle": "네스트 잼 세션",
     "mascot.bandDesc": "수요일 무대는 저희 귀여운 마스코트 밴드와 함께 연주하는 특별한 잼 세션을 위해 열려 있습니다.",
     "mascot.cheerTitle": "건배와 축하",
     "mascot.cheerDesc": "저희 블루버드는 다양성, 사랑, 훌륭한 음악을 함께 축하하기 위해 모든 분을 환영합니다. 와인이나 맥주를 들고 재즈를 즐겨보세요!"
-  },
-  ru: {
-    "nav.home": "Главная",
-    "nav.about": "О нас",
-    "nav.whatsOn": "Афиша",
-    "nav.drinks": "Меню",
-    "nav.gallery": "Галерея",
-    "nav.visit": "Контакты & Бронь",
-    "nav.book": "Забронировать",
-    
-    "hero.tagline": "Джаз, виниловый винтаж и арт-галерея в атмосфере ностальгии",
-    "hero.appearing": "Сегодня на сцене",
-    "hero.cta": "Посмотреть расписание",
-    
-    "common.hours": "Часы работы",
-    "common.hoursDetail": "Ср – Пн: 17:00 – 00:00 (Вторник – выходной)",
-    "common.address": "Адрес",
-    "common.addressDetail": "355/3 Soi Sukhumvit 55 (Thong Lo), Khlong Tan Nuea, Watthana, Bangkok 10110",
-    "common.landmark": "Ориентир: между Thonglor Soi 17 и 19, рядом с 7-Eleven. Вход со стороны Soi 17, бар на 3-м этаже.",
-    "common.phone": "Телефон",
-    "common.email": "Эл. почта",
-    "common.cover": "Входная плата",
-    "common.reserve": "Бронирование",
-    "common.reserveCta": "Предварительная бронь столов через LINE / WhatsApp",
-    "common.line": "Написать в LINE OA",
-    "common.whatsapp": "Написать в WhatsApp",
-    "common.call": "Позвонить",
-    "common.ratings": "Рейтинги",
-
-    "about.title": "Уютная гостиная для джаза и искусства",
-    "about.subtitle": "О нас",
-    "about.p1": "Bluebird Jazz Bar — это уютный джаз-бар с живой музыкой и арт-галерея, спрятанные на 3-м этаже в самом сердце района Thonglor в Бангкоке. В отличие от других местных заведений, здесь звучат исключительно классические джазовые стандарты, американская классика и теплый аналоговый винил.",
-    "about.p2": "Мы создали здесь непринужденную и ностальгическую атмосферу домашних посиделок — «словно вы слушаете джаз в гостиной у друга». Придерживаясь душевного стиля Нового Орлеана, бар открыт для гостей всех поколений и культур, позволяя наслаждаться джазом без лишнего пафоса.",
-    "about.p3": "Помимо вечерней живой музыки, стены бара служат галереей современного искусства. Каждую среду мы открываем сцену для джем-сейшенов, приглашая местных музыкантов и ценителей джаза поиграть вместе в атмосфере квартирника.",
-    "about.feature1.title": "Виниловый архив",
-    "about.feature1.desc": "Коллекция легендарных джазовых пластинок, создающая теплое винтажное звучание каждый вечер.",
-    "about.feature2.title": "Близко к сцене",
-    "about.feature2.desc": "Столы расположены вплотную к музыкантам, позволяя буквально почувствовать живые акустические вибрации.",
-
-    "whatsOn.title": "Живой джаз",
-    "whatsOn.subtitle": "Афиша",
-    "whatsOn.desc": "Живой джаз звучит каждый вечер с 20:00 или 20:30 (выходной — вторник). Вход свободный, бронь не обязательна.",
-    "whatsOn.jamTitle": "Джем-сейшены по средам",
-    "whatsOn.jamDesc": "Открытая сцена для местных музыкантов и джазменов-путешественников для совместной импровизации.",
-    "whatsOn.coverChargeDesc": "🔸 Входная плата: в некоторые вечера взимается плата на входе в поддержку артистов. Уточняйте стоимость на входе или в наших соцсетях.",
-
-    "menu.title": "Напитки и Закуски",
-    "menu.subtitle": "Меню",
-    "menu.desc": "Специально подобранные напитки и закуски к живому джазу. Пожалуйста, ознакомьтесь с актуальным меню на баре.",
-    "menu.featured": "Фирменный коктейль",
-    "menu.featuredDesc": "Фирменный коктейль «Bluebird». Яркий синий микс на основе джина с добавлением ликера блю кюрасао и свежего лимона, подается в бокале в форме птицы.",
-    "menu.thb": "бат",
-
-    "gallery.title": "Фотогалерея",
-    "gallery.subtitle": "Галерея",
-    "gallery.desc": "Аналоговое тепло, ящики с винилом, винтажные пластинки и современная живопись на стенах.",
-
-    "visit.title": "Где мы находимся",
-    "visit.subtitle": "Контакты",
-    "visit.findUs": "Проезд",
-    "visit.findUsDetail": "Расположен на Sukhumvit 55, между Thonglor Soi 17 и 19 (рядом с 7-Eleven). Найдите нашу вывеску с синей птицей у входа на Soi 17 и поднимитесь по лестнице на 3-й этаж.",
-    "visit.reserveTitle": "Форма бронирования",
-    "visit.reserveDesc": "Ввиду небольшого размера бара мы рекомендуем бронировать столы заранее. Форма создаст готовое сообщение для отправки через WhatsApp или LINE.",
-    "visit.name": "Имя и фамилия",
-    "visit.phone": "Телефон",
-    "visit.date": "Дата визита",
-    "visit.time": "Время визита",
-    "visit.guests": "Количество гостей",
-    "visit.contact": "Способ бронирования",
-    "visit.requests": "Пожелания (опционально)",
-    "visit.submit": "Запросить бронь стола",
-    "visit.successLine": "Детали бронирования скопированы! Открываем LINE для отправки сообщения.",
-
-    "vinyl.nowPlaying": "Сейчас на проигрывателе",
-    "vinyl.artist": "Виниловая сессия",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Все права защищены. Разработано по мотивам Blue Note NYC; авторские права соблюдены.",
-    "mascot.title": "История создания маскота",
-    "mascot.desc": "Наш талисман Синяя птица начинался как уютный карандашный набросок от руки, выражающий нашу любовь к классическому живому джазу и винилу.",
-    "mascot.bandTitle": "Джем-сейшен в гнезде",
-    "mascot.bandDesc": "Наша сцена по средам открыта для особых джем-сейшенов с участием нашей очаровательной группы маскотов.",
-    "mascot.cheerTitle": "Будем здоровы!",
-    "mascot.cheerDesc": "Наше гнездо приветствует всех, празднуя разнообразие, любовь и хорошую музыку. Возьмите бокал вина или пива и наслаждайтесь джазом!"
-  },
-  es: {
-    "nav.home": "Inicio",
-    "nav.about": "Historia",
-    "nav.whatsOn": "Calendario",
-    "nav.drinks": "Menú",
-    "nav.gallery": "Galería",
-    "nav.visit": "Visita & Reserva",
-    "nav.book": "Reservar Mesa",
-    
-    "hero.tagline": "Música jazz, discos de vinilo y galería de arte en un tiempo nostálgico",
-    "hero.appearing": "Esta Noche",
-    "hero.cta": "Ver Calendario Semanal",
-    
-    "common.hours": "Horario",
-    "common.hoursDetail": "Mié – Lun: 17:00 – Medianoche (Cerrado los martes)",
-    "common.address": "Dirección",
-    "common.addressDetail": "355/3 Soi Sukhumvit 55 (Thong Lo), Khlong Tan Nuea, Watthana, Bangkok 10110",
-    "common.landmark": "Punto de referencia: Ubicado entre Thonglor Soi 17 y 19, al lado del 7-Eleven. La entrada está en el Soi 17; el establecimiento está en el 3er piso.",
-    "common.phone": "Teléfono",
-    "common.email": "Correo",
-    "common.cover": "Cover",
-    "common.reserve": "Reservas de Mesa",
-    "common.reserveCta": "Reserve mesa con antelación vía LINE / WhatsApp",
-    "common.line": "Chat vía LINE OA",
-    "common.whatsapp": "Chat vía WhatsApp",
-    "common.call": "Llamada Directa",
-    "common.ratings": "Calificaciones",
-
-    "about.title": "Una Acogedora Sala de Estar para el Jazz",
-    "about.subtitle": "Historia",
-    "about.p1": "Bluebird Jazz Bar es un acogedor santuario de música en vivo y galería de arte en el 3er piso, escondido en el corazón de Thonglor, Bangkok. A diferencia de otros bares de la zona que tocan canciones de cover tailandesas, Bluebird se enfoca puramente en estándares clásicos de jazz, clásicos americanos y cálidos discos de vinilo analógicos.",
-    "about.p2": "Diseñamos el espacio para evocar un ambiente relajado y nostálgico de fiesta en casa, 'como escuchar jazz en la sala de un amigo'. Adoptando un amigable estilo de Nueva Orleans, invita a visitantes de todas las generaciones a disfrutar del jazz en un espacio informal, accesible y energético.",
-    "about.p3": "Además del jazz en vivo todas las noches, nuestras paredes sirven como galería de obras de arte contemporáneo. Cada miércoles por la noche, abrimos el escenario para jam sessions, invitando a músicos locales y entusiastas a tocar juntos.",
-    "about.feature1.title": "Archivo de Vinilos",
-    "about.feature1.desc": "Tocamos una colección seleccionada de discos de jazz legendarios, rotando clásicos para establecer el tono analógico.",
-    "about.feature2.title": "Cerca del Escenario",
-    "about.feature2.desc": "Los asientos están integrados alrededor de los músicos, permitiéndote sentir las vibraciones acústicas crudas.",
-
-    "whatsOn.title": "Calendario de Conciertos",
-    "whatsOn.subtitle": "Calendario",
-    "whatsOn.desc": "La música en vivo comienza a las 8:00 PM o 8:30 PM todas las noches (Cerrado los martes). Walk-ins siempre bienvenidos.",
-    "whatsOn.jamTitle": "Jam Sessions de los Miércoles",
-    "whatsOn.jamDesc": "Escenario abierto para artistas locales, músicos de jazz y viajeros para improvisar juntos en un ambiente casual.",
-    "whatsOn.coverChargeDesc": "🔸 Cover: Se aplican tarifas de entrada en ciertas noches para los artistas. Por favor, consulte los detalles de precios en la puerta o vía redes sociales.",
-
-    "menu.title": "Menú de Bebidas y Tapas",
-    "menu.subtitle": "Bebidas & Tapas",
-    "menu.desc": "Bebidas artesanales y bocados seleccionados para acompañar la música en vivo. Los artículos y precios son de referencia; consulte el menú real en la barra.",
-    "menu.featured": "Cóctel Destacado",
-    "menu.featuredDesc": "El cóctel firma 'Bluebird'. Una mezcla vibrante a base de ginebra con curaçao azul y limón fresco, servido en nuestra icónica copa en forma de pájaro.",
-    "menu.thb": "THB",
-
-    "gallery.title": "Galería del Bar",
-    "gallery.subtitle": "La Galería",
-    "gallery.desc": "Calidez analógica, cajas de vinilos, portadas de discos y obras de arte contemporáneo decorando nuestras paredes.",
-
-    "visit.title": "Cómo Encontrarnos",
-    "visit.subtitle": "Visítanos",
-    "visit.findUs": "Direcciones",
-    "visit.findUsDetail": "Ubicado en Sukhumvit 55, entre Thonglor Soi 17 y 19 (junto al 7-Eleven). Busque nuestro letrero con el logo del pájaro azul en la entrada del Soi 17, luego suba las escaleras hasta el 3er piso.",
-    "visit.reserveTitle": "Detalles de Reserva",
-    "visit.reserveDesc": "Debido al tamaño limitado del lugar, recomendamos reservar mesa con antelación. Este formulario recopilará los detalles de su reserva para enviarlos por WhatsApp o LINE.",
-    "visit.name": "Nombre Completo",
-    "visit.phone": "Número de Teléfono",
-    "visit.date": "Fecha de Reserva",
-    "visit.time": "Sesión de Show",
-    "visit.guests": "Número de Personas",
-    "visit.contact": "Método de Reserva",
-    "visit.requests": "Peticiones Especiales (Opcional)",
-    "visit.submit": "Enviar Solicitud de Reserva",
-    "visit.successLine": "¡Detalles de reserva copiados! Abriendo LINE para enviar el mensaje.",
-
-    "vinyl.nowPlaying": "Reproduciendo",
-    "vinyl.artist": "Sesión de Vinilo",
-    "vinyl.copyright": "© 2026 Bluebird Jazz Bar Thonglor. Todos los derechos reservados. Inspirado en Blue Note NYC; respetando los derechos de autor.",
-    "mascot.title": "Detrás del diseño del mascot",
-    "mascot.desc": "El Bluebird mascot comenzó como un boceto a lápiz hecho a mano, que expresa nuestro amor por el jazz clásico en vivo y los discos de vinilo vintage.",
-    "mascot.bandTitle": "Sesión de Jam en el Nido",
-    "mascot.bandDesc": "Nuestro escenario de los miércoles está abierto para sesiones de jam especiales con nuestra adorable banda de mascotas.",
-    "mascot.cheerTitle": "Salud y Celebración",
-    "mascot.cheerDesc": "Nuestro nido da la bienvenida a todos para celebrar la diversidad, el amor y la buena música. ¡Toma una copa de vino o cerveza y disfruta del jazz!"
   }
 };
 
@@ -513,9 +349,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Load saved preference from localStorage if available
   useEffect(() => {
     const savedLanguage = localStorage.getItem('bluebird-lang') as Language;
-    const validLanguages: Language[] = ['th', 'en', 'ja', 'ko', 'ru', 'es'];
+    const validLanguages: Language[] = ['th', 'en', 'ja', 'ko'];
     if (savedLanguage && validLanguages.includes(savedLanguage)) {
-      setLanguageState(savedLanguage);
+      setTimeout(() => {
+        setLanguageState(savedLanguage);
+      }, 0);
     }
   }, []);
 

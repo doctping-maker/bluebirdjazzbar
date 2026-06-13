@@ -9,46 +9,74 @@ export default function Visit() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [guests, setGuests] = useState('2 Guests');
-  const [method, setMethod] = useState('WhatsApp');
+  const [session, setSession] = useState('');
+  const [guests, setGuests] = useState(2);
   const [requests, setRequests] = useState('');
+  const [pdpaConsent, setPdpaConsent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const formattedRequests = requests ? requests : (language === 'th' ? 'ไม่มีรายละเอียดเพิ่มเติม' : 'None');
+    if (!pdpaConsent) {
+      alert(language === 'th' ? 'กรุณายินยอมให้เก็บข้อมูลเพื่อติดต่อกลับ' : 'Please agree to the privacy consent.');
+      return;
+    }
     
-    // Construct message in Thai
-    const message = `สวัสดีครับ/ค่ะ ต้องการจองโต๊ะที่ Bluebird Jazz Bar
-รายละเอียดการจอง:
-• ชื่อผู้จอง: ${name}
-• เบอร์โทรติดต่อ: ${phone}
-• วันที่: ${date}
-• รอบเวลา: ${time}
-• จำนวน: ${guests}
-• ความต้องการเพิ่มเติม: ${formattedRequests}
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-รบกวนยืนยันการจองให้ด้วยนะครับ/ค่ะ ขอบคุณครับ/ค่ะ`;
+    // Botcheck honeypot value check
+    const target = e.currentTarget as HTMLFormElement;
+    const botcheckInput = target.elements.namedItem('botcheck') as HTMLInputElement;
+    if (botcheckInput && botcheckInput.checked) {
+      // Fake successful submit for bot
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setSubmitStatus('success');
+      }, 500);
+      return;
+    }
 
-    const encodedMessage = encodeURIComponent(message);
-    const shopPhone = '66897779248'; // 089 777 9248
-    
-    if (method === 'WhatsApp') {
-      const url = `https://api.whatsapp.com/send?phone=${shopPhone}&text=${encodedMessage}`;
-      window.open(url, '_blank');
-    } else if (method === 'LINE') {
-      navigator.clipboard.writeText(message).then(() => {
-        alert(t('visit.successLine'));
-        window.open('https://line.me/ti/p/@bluebirdjazzbar', '_blank');
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-        window.open('https://line.me/ti/p/@bluebirdjazzbar', '_blank');
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_ACCESS_KEY_HERE', // User will replace this with their actual key
+          subject: 'จองโต๊ะใหม่ - Bluebird Jazz Bar',
+          from_name: 'Bluebird Web Booking',
+          name: name,
+          phone: phone,
+          date: date,
+          session: session || 'Not specified',
+          guests: guests,
+          notes: requests || 'None',
+        })
       });
-    } else {
-      // Call
-      alert(`📞 Direct line for table bookings: 089-777-9248\n\nBooking data:\nName: ${name}\nDate: ${date}\nTime: ${time}\nGuests: ${guests}`);
-      window.open(`tel:${shopPhone}`, '_self');
+
+      const data = await response.json();
+      if (response.status === 200 && data.success) {
+        setSubmitStatus('success');
+        // Reset inputs
+        setName('');
+        setPhone('');
+        setDate('');
+        setSession('');
+        setGuests(2);
+        setRequests('');
+        setPdpaConsent(false);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -141,138 +169,216 @@ export default function Visit() {
           </div>
 
           {/* Column 2: Booking Form */}
-          <div id="reserve-form-section" className="lg:col-span-6 bg-bg-panel border border-line p-8 sm:p-10 rounded-sm shadow-xl">
-            <h2 className="font-display font-bold text-2xl text-ink uppercase tracking-wider mb-2">
-              {t('visit.reserveTitle')}
-            </h2>
-            <p className="text-[13px] text-ink-muted leading-relaxed font-light mb-8">
-              {t('visit.reserveDesc')}
-            </p>
-
-            <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">
-              
-              {/* Name */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.name')}
-                </label>
-                <input 
-                  type="text" 
-                  value={name} 
-                  onChange={(e) => setName(e.target.value)} 
-                  placeholder="e.g. John Doe"
-                  required 
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
-                />
-              </div>
-
-              {/* Phone */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.phone')}
-                </label>
-                <input 
-                  type="tel" 
-                  value={phone} 
-                  onChange={(e) => setPhone(e.target.value)} 
-                  placeholder="e.g. 0897779248"
-                  required 
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
-                />
-              </div>
-
-              {/* Date */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.date')}
-                </label>
-                <input 
-                  type="date" 
-                  value={date} 
-                  onChange={(e) => setDate(e.target.value)} 
-                  required 
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
-                />
-              </div>
-
-              {/* Time slot */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.time')}
-                </label>
-                <select 
-                  value={time} 
-                  onChange={(e) => setTime(e.target.value)} 
-                  required
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+          <div id="reserve-form-section" className="lg:col-span-6 bg-bg-panel border border-line p-8 sm:p-10 rounded-sm shadow-xl relative">
+            
+            {submitStatus === 'success' ? (
+              <div className="flex flex-col gap-6 text-center py-8">
+                <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                  <i className="fas fa-check" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-xl text-ink uppercase tracking-wide mb-2">
+                    {language === 'th' ? 'ส่งคำขอแล้ว' : 'Request Received'}
+                  </h3>
+                  <p className="text-sm text-ink-muted leading-relaxed font-light">
+                    {language === 'th' 
+                      ? 'ได้รับคำขอจองแล้ว ทางร้านจะติดต่อกลับเพื่อยืนยัน' 
+                      : 'Received your reservation request. We will contact you back to confirm.'}
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setSubmitStatus('idle')}
+                  className="text-xs text-accent underline hover:text-ink transition-colors cursor-pointer focus:outline-none"
                 >
-                  <option value="" disabled>{language === 'th' ? '-- เลือกรอบการแสดง --' : '-- Select Performance Session --'}</option>
-                  <option value="07:30 PM (Session 1)">07:30 PM (For 8:00 PM live band)</option>
-                  <option value="10:00 PM (Session 2)">10:00 PM (For 10:30 PM live band)</option>
-                  <option value="06:00 PM (Lounge/Vinyl only)">06:00 PM (Lounge &amp; Vinyl only)</option>
-                </select>
+                  {language === 'th' ? 'ส่งคำขอจองใหม่' : 'Submit another request'}
+                </button>
               </div>
-
-              {/* Number of guests */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.guests')}
-                </label>
-                <select 
-                  value={guests} 
-                  onChange={(e) => setGuests(e.target.value)} 
-                  required
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+            ) : submitStatus === 'error' ? (
+              <div className="flex flex-col gap-6 text-center py-8">
+                <div className="w-16 h-16 bg-rose-500/10 border border-rose-500/30 text-rose-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                  <i className="fas fa-exclamation" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-xl text-ink uppercase tracking-wide mb-2">
+                    {language === 'th' ? 'เกิดข้อผิดพลาด' : 'Submission Failed'}
+                  </h3>
+                  <p className="text-sm text-ink-muted leading-relaxed font-light">
+                    {language === 'th' 
+                      ? 'กรุณาโทร 089-777-9248 หรือจองผ่าน LINE ทางด้านล่าง' 
+                      : 'Please call 089-777-9248 or message us via LINE below.'}
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setSubmitStatus('idle')}
+                  className="text-xs text-accent underline hover:text-ink transition-colors cursor-pointer focus:outline-none"
                 >
-                  <option value="1 Guest">1 Guest</option>
-                  <option value="2 Guests">2 Guests</option>
-                  <option value="3 Guests">3 Guests</option>
-                  <option value="4 Guests">4 Guests</option>
-                  <option value="5-6 Guests">5 - 6 Guests (Sofa / Counter)</option>
-                  <option value="7+ Guests">7+ Guests (Requires confirmation)</option>
-                </select>
+                  {language === 'th' ? 'กลับไปที่ฟอร์ม' : 'Go back to form'}
+                </button>
               </div>
+            ) : (
+              <>
+                <h2 className="font-display font-bold text-2xl text-ink uppercase tracking-wider mb-2">
+                  {language === 'th' ? 'ส่งคำขอสำรองที่นั่ง' : 'Send Reservation Request'}
+                </h2>
+                <p className="text-[13px] text-ink-muted leading-relaxed font-light mb-8">
+                  {language === 'th'
+                    ? 'พื้นที่ร้านมีจำนวนจำกัด ส่งข้อมูลความประสงค์เพื่อจองโต๊ะล่วงหน้า (จะได้รับการยืนยันเมื่อเจ้าหน้าที่ติดต่อกลับ)'
+                    : 'Intimate space with limited seats. Send your request to reserve in advance (confirmed only when staff contacts you back).'}
+                </p>
 
-              {/* Contact Method */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.contact')}
-                </label>
-                <select 
-                  value={method} 
-                  onChange={(e) => setMethod(e.target.value)} 
-                  required
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+                <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">
+                  {/* Honeypot for bots */}
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
+                  {/* Name */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'ชื่อผู้จอง *' : 'Reservation Name *'}
+                    </label>
+                    <input 
+                      type="text" 
+                      value={name} 
+                      onChange={(e) => setName(e.target.value)} 
+                      placeholder="e.g. John Doe"
+                      required 
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
+                    />
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'เบอร์โทรศัพท์ *' : 'Contact Phone *'}
+                    </label>
+                    <input 
+                      type="tel" 
+                      value={phone} 
+                      onChange={(e) => setPhone(e.target.value)} 
+                      placeholder="e.g. 0897779248"
+                      required 
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
+                    />
+                  </div>
+
+                  {/* Date */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'วันที่ต้องการจอง *' : 'Date of Booking *'}
+                    </label>
+                    <input 
+                      type="date" 
+                      value={date} 
+                      onChange={(e) => setDate(e.target.value)} 
+                      required 
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+                    />
+                  </div>
+
+                  {/* Time slot / Session */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'โชว์ / รอบเวลาที่สนใจ' : 'Show / Session Preference'}
+                    </label>
+                    <select 
+                      value={session} 
+                      onChange={(e) => setSession(e.target.value)} 
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+                    >
+                      <option value="">{language === 'th' ? '-- เลือกรอบที่ต้องการ (ไม่บังคับ) --' : '-- Select Session (Optional) --'}</option>
+                      <option value="07:30 PM (Session 1)">07:30 PM (For 8:00 PM Live Band)</option>
+                      <option value="10:00 PM (Session 2)">10:00 PM (For 10:30 PM Live Band)</option>
+                      <option value="06:00 PM (Lounge/Vinyl only)">06:00 PM (Vinyl listening &amp; Lounge only)</option>
+                    </select>
+                  </div>
+
+                  {/* Number of guests (number input) */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'จำนวนคน *' : 'Guests *'}
+                    </label>
+                    <input 
+                      type="number"
+                      min={1}
+                      max={30}
+                      value={guests} 
+                      onChange={(e) => setGuests(parseInt(e.target.value) || 1)} 
+                      required
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light"
+                    />
+                  </div>
+
+                  {/* Remarks */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
+                      {language === 'th' ? 'หมายเหตุ' : 'Notes / Remarks'}
+                    </label>
+                    <textarea 
+                      value={requests} 
+                      onChange={(e) => setRequests(e.target.value)} 
+                      rows={3}
+                      placeholder={language === 'th' ? "ระบุที่นั่งพิเศษ หรือความต้องการอื่นๆ..." : "Any seating preference, celebrating birthday, etc."}
+                      className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
+                    />
+                  </div>
+
+                  {/* PDPA consent */}
+                  <div className="flex items-start gap-3 mt-1">
+                    <input 
+                      type="checkbox" 
+                      id="pdpa" 
+                      checked={pdpaConsent} 
+                      onChange={(e) => setPdpaConsent(e.target.checked)} 
+                      required
+                      className="mt-1 cursor-pointer accent-accent"
+                    />
+                    <label htmlFor="pdpa" className="text-xs text-ink-muted/80 font-light select-none cursor-pointer leading-normal">
+                      {language === 'th' ? (
+                        <>ยินยอมให้ร้านเก็บข้อมูลเพื่อติดต่อยืนยันการจอง | <a href="/privacy" target="_blank" className="text-accent underline hover:text-ink transition-colors">นโยบายความเป็นส่วนตัว</a></>
+                      ) : (
+                        <>Consent to store contact information for booking confirmations | <a href="/privacy" target="_blank" className="text-accent underline hover:text-ink transition-colors">Privacy Policy</a></>
+                      )}
+                    </label>
+                  </div>
+
+                  {/* Submit button (Clear indicating Request, not instant confirmation) */}
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="bg-accent text-bg-deep hover:bg-transparent hover:text-accent border border-accent py-4 rounded-sm text-xs font-bold tracking-widest uppercase transition-all duration-300 mt-4 cursor-pointer shadow-lg hover:shadow-accent/10 disabled:opacity-50"
+                  >
+                    {isSubmitting 
+                      ? (language === 'th' ? 'กำลังส่งคำขอ...' : 'Sending Request...') 
+                      : (language === 'th' ? 'ส่งคำขอจอง (รอยืนยัน)' : 'Send Booking Request')}
+                  </button>
+                </form>
+              </>
+            )}
+
+            {/* Alternative Backup Buttons */}
+            <div className="flex flex-col gap-4 mt-8 pt-8 border-t border-line/10">
+              <span className="text-[10px] font-bold tracking-[4px] text-ink-muted/60 uppercase text-center block">
+                {language === 'th' ? 'ช่องทางการจองสำรอง' : 'Alternative Booking Channels'}
+              </span>
+              <div className="grid grid-cols-2 gap-4">
+                <a 
+                  href="tel:+66897779248"
+                  className="flex items-center justify-center gap-2 border border-accent/30 text-accent hover:bg-accent hover:text-bg-deep py-3.5 px-4 rounded-sm text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md text-center cursor-pointer"
                 >
-                  <option value="WhatsApp">WhatsApp Message</option>
-                  <option value="LINE">LINE Chat Message</option>
-                  <option value="Direct Call">Direct Phone Call</option>
-                </select>
+                  <i className="fas fa-phone-alt text-xs" />
+                  {language === 'th' ? 'โทรจอง' : 'Call Booking'}
+                </a>
+                <a 
+                  href="https://line.me/ti/p/@bluebirdjazzbar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-bg-deep py-3.5 px-4 rounded-sm text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md text-center cursor-pointer"
+                >
+                  <i className="fab fa-line text-sm" />
+                  {language === 'th' ? 'จองผ่าน LINE' : 'Book via LINE'}
+                </a>
               </div>
+            </div>
 
-              {/* Special Requests */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-bold tracking-widest text-accent uppercase">
-                  {t('visit.requests')}
-                </label>
-                <textarea 
-                  value={requests} 
-                  onChange={(e) => setRequests(e.target.value)} 
-                  rows={3}
-                  placeholder={language === 'th' ? "เช่น ความต้องการเรื่องโซฟา ฉลองวันเกิด..." : "e.g. Sofa preference, birthday celebration..."}
-                  className="bg-bg-deep border border-line/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent rounded-sm py-3 px-4 text-ink text-sm font-light placeholder:text-ink-muted/30"
-                />
-              </div>
-
-              {/* Submit */}
-              <button 
-                type="submit" 
-                className="bg-accent text-bg-deep hover:bg-transparent hover:text-accent border border-accent py-4 rounded-sm text-xs font-bold tracking-widest uppercase transition-all duration-300 mt-4 cursor-pointer shadow-lg hover:shadow-accent/10"
-              >
-                {t('visit.submit')}
-              </button>
-
-            </form>
           </div>
 
         </div>

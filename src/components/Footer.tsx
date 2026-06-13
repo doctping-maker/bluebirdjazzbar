@@ -6,10 +6,73 @@ import { useLanguage } from '../context/LanguageContext';
 import { Logo } from './Logo';
 
 export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <footer className="bg-[#050B13] border-t border-line py-16 px-5 md:px-[8%] mt-auto text-ink-muted">
+      {/* PRESS / FEATURED IN SECTION */}
+      <div className="max-w-6xl mx-auto border-b border-line/10 pb-12 mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          {/* Left side: positioning text */}
+          <div className="max-w-xl">
+            <span className="text-[10px] font-bold tracking-[4px] text-accent uppercase block mb-2">Featured In / ได้รับการแนะนำใน</span>
+            <p className="text-sm text-ink-muted leading-relaxed font-light">
+              {language === 'th' ? (
+                <>ได้รับการแนะนำโดย <strong className="text-ink font-semibold">The Standard</strong>, <strong className="text-ink font-semibold">Time Out Bangkok</strong> และ <strong className="text-ink font-semibold">UNLOCKMEN</strong> ในฐานะหนึ่งในบาร์แจ๊สที่ดีที่สุดของกรุงเทพ ตั้งแต่ปี 2019</>
+              ) : (
+                <>Recommended by <strong className="text-ink font-semibold">The Standard</strong>, <strong className="text-ink font-semibold">Time Out Bangkok</strong>, and <strong className="text-ink font-semibold">UNLOCKMEN</strong> as one of Bangkok’s best jazz bars since 2019.</>
+              )}
+            </p>
+          </div>
+
+          {/* Right side: Media / Search links list */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs">
+            <a 
+              href="https://thestandard.co/bluebird-jazz-bar/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-ink-muted hover:text-accent font-semibold transition-colors uppercase tracking-wider"
+            >
+              THE STANDARD
+            </a>
+            <a 
+              href="https://www.timeout.com/bangkok/bars/blue-bird-jazz-bar" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-ink-muted hover:text-accent font-semibold transition-colors uppercase tracking-wider"
+            >
+              TIME OUT BANGKOK
+            </a>
+            <a 
+              href="https://www.unlockmen.com/edipor-pick-best-jazz-bars/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-ink-muted hover:text-accent font-semibold transition-colors uppercase tracking-wider"
+            >
+              UNLOCKMEN
+            </a>
+            <a 
+              href="https://www.wongnai.com/listings/jazz-bar-in-bangkok-city" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-ink-muted hover:text-accent font-semibold transition-colors uppercase tracking-wider"
+            >
+              WONGNAI
+            </a>
+            <span className="h-4 w-[1px] bg-line/20 hidden sm:inline-block" />
+            <a 
+              href="https://www.theconcert.com/store/5000306" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-accent hover:text-ink font-bold transition-colors uppercase tracking-widest flex items-center gap-1.5"
+            >
+              <i className="fas fa-ticket text-[10px]" />
+              THE CONCERT
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         {/* Branding & description */}
         <div className="flex flex-col gap-4">

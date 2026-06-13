@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const VinylPlayer: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [show, setShow] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -40,6 +40,13 @@ export const VinylPlayer: React.FC = () => {
     audioRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
   };
+
+  const playLabel = {
+    th: isPlaying ? "หยุด" : "เปิดเพลงไวนิล",
+    en: isPlaying ? "Pause" : "Play Vinyl",
+    ja: isPlaying ? "一時停止" : "レコード再生",
+    ko: isPlaying ? "정지" : "바이닐 재생"
+  }[language] || (isPlaying ? "Pause" : "Play Vinyl");
 
   return (
     <div 
@@ -84,7 +91,7 @@ export const VinylPlayer: React.FC = () => {
 
       {/* Track Info */}
       <div className="flex flex-col select-none">
-        <span className="font-semibold text-[11px] text-ink whitespace-nowrap tracking-wide leading-none">{t('vinyl.nowPlaying')}</span>
+        <span className="font-semibold text-[11px] text-ink whitespace-nowrap tracking-wide leading-none">{playLabel}</span>
         <span className="text-[10px] text-ink-muted whitespace-nowrap mt-0.5">{t('vinyl.artist')}</span>
       </div>
 
@@ -93,7 +100,7 @@ export const VinylPlayer: React.FC = () => {
         <button 
           onClick={handlePlayToggle}
           aria-label="Play/Pause Vinyl Music"
-          className="w-7 h-7 flex items-center justify-center rounded-full border border-accent/30 text-accent hover:bg-accent hover:text-bg-deep transition-all duration-300"
+          className="w-7 h-7 flex items-center justify-center rounded-full border border-accent/30 text-accent hover:bg-accent hover:text-bg-deep transition-all duration-300 cursor-pointer"
         >
           {isPlaying ? (
             <i className="fas fa-pause text-xs"></i>
@@ -104,7 +111,7 @@ export const VinylPlayer: React.FC = () => {
         <button 
           onClick={handleMuteToggle}
           aria-label="Mute/Unmute Music"
-          className="text-ink-muted hover:text-ink transition-colors"
+          className="text-ink-muted hover:text-ink transition-colors cursor-pointer"
         >
           {isMuted ? (
             <i className="fas fa-volume-mute text-sm"></i>
@@ -112,12 +119,21 @@ export const VinylPlayer: React.FC = () => {
             <i className="fas fa-volume-up text-sm"></i>
           )}
         </button>
+        {/* Close Widget */}
+        <button 
+          onClick={() => setShow(false)}
+          aria-label="Close Vinyl Player"
+          className="text-ink-muted hover:text-accent transition-colors ml-1 cursor-pointer focus:outline-none"
+        >
+          <i className="fas fa-times text-xs"></i>
+        </button>
       </div>
 
       {/* Hidden audio element */}
       <audio 
         ref={audioRef}
         src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" 
+        preload="none"
         loop
       />
     </div>

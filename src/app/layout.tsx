@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "../context/LanguageContext";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { VinylPlayer } from "../components/VinylPlayer";
+import { Maintenance } from "../components/Maintenance";
 
 export const metadata: Metadata = {
   title: "Bluebird Jazz Bar | Live Jazz & Vinyl Art Lounge in Thonglor, Bangkok",
@@ -11,8 +9,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bluebird Jazz Bar Thonglor",
     description: "An intimate live-jazz bar, vinyl listening club, and art gallery in Thonglor, Bangkok.",
-    url: "https://facebook.com/bluebirdjazzbar",
+    url: "https://bluebirdjazzbar.com",
     type: "website",
+    images: [
+      {
+        url: "https://bluebirdjazzbar.com/hero-real.jpg",
+        width: 1200,
+        height: 675,
+        alt: "Bluebird Jazz Bar Thonglor",
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bluebird Jazz Bar Thonglor",
+    description: "An intimate live-jazz bar, vinyl listening club, and art gallery in Thonglor, Bangkok.",
+    images: ["https://bluebirdjazzbar.com/hero-real.jpg"],
   }
 };
 
@@ -28,6 +40,11 @@ const jsonLdSchema = {
     "addressRegion": "Bangkok",
     "postalCode": "10110",
     "addressCountry": "TH"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 13.735485,
+    "longitude": 100.580804
   },
   "telephone": "+66897779248",
   "email": "bluebirdjazzbar@gmail.com",
@@ -73,19 +90,8 @@ export default function RootLayout({
           {/* Nostalgic Texture Film-grain overlay */}
           <div className="film-grain" />
 
-          {/* Sticky Nav Header */}
-          <Header />
-
-          {/* Page content wrapper */}
-          <main className="flex-grow flex flex-col pt-[80px]">
-            {children}
-          </main>
-
-          {/* Footer details */}
-          <Footer />
-
-          {/* Floating vinyl record player */}
-          <VinylPlayer />
+          {/* Global Maintenance View */}
+          <Maintenance />
         </LanguageProvider>
       </body>
     </html>

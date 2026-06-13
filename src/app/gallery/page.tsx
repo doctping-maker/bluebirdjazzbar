@@ -9,7 +9,7 @@ export default function Gallery() {
   const gallerySlots = [
     {
       id: 1,
-      src: "/premium_vinyl_turntable.png",
+      src: "/gallery-1.jpg",
       name: "vinyl-turntable",
       altTH: "เครื่องเล่นแผ่นเสียงและคอลเลกชันแผ่นเสียงคลาสสิก",
       descEN: "Vintage high-end turntable spinning a classic jazz record in front of record stacks",
@@ -17,7 +17,7 @@ export default function Gallery() {
     },
     {
       id: 2,
-      src: "/premium_bar_hero.png",
+      src: "/gallery-2.jpg",
       name: "live-venue",
       altTH: "เวทีคอนเสิร์ตแจ๊สท่ามกลางแสงไฟนีออนและสปอตไลต์อบอุ่น",
       descEN: "The glowing stage at Bluebird Jazz Bar, featuring a grand piano and saxophone under moody amber spotlights",
@@ -25,7 +25,7 @@ export default function Gallery() {
     },
     {
       id: 3,
-      src: "/premium_jazz_sax.png",
+      src: "/gallery-3.jpg",
       name: "saxophone-spotlight",
       altTH: "แซกโซโฟนทองเหลืองสะท้อนแสงไฟสปอตไลต์อันอบอุ่นบนเวที",
       descEN: "Sleek brass saxophone detailed under warm stage spotlights",
@@ -33,7 +33,7 @@ export default function Gallery() {
     },
     {
       id: 4,
-      src: "/premium_blue_cocktail.png",
+      src: "/gallery-4.jpg",
       name: "signature-cocktail",
       altTH: "ค็อกเทลซิกเนเจอร์สีฟ้าตกแต่งด้วยดอกไม้ทานได้ในแก้วคริสตัลระยิบระยับ",
       descEN: "The Bluebird signature cocktail with clean botanical notes and lemon twist garnish",
@@ -41,7 +41,7 @@ export default function Gallery() {
     },
     {
       id: 5,
-      src: "/premium_bar_counter.png",
+      src: "/gallery-5.jpg",
       name: "bar-counter",
       altTH: "เคาน์เตอร์บาร์ไม้ขัดเงาสะท้อนแสงไฟพร้อมค็อกเทลคลาสสิกและขวดวิสกี้เกรดพรีเมียม",
       descEN: "Luxurious polished wood bar counter showcasing premium spirits, whiskey bottles, and signature crafts",
@@ -49,7 +49,7 @@ export default function Gallery() {
     },
     {
       id: 6,
-      src: "/bluebird_7.jpg",
+      src: "/gallery-6.jpg",
       name: "cozy-seating",
       altTH: "มุมนั่งเล่นโซฟาสไตล์เรโทรไฟสลัวบรรยากาศอบอุ่น",
       descEN: "Cozy retro velvet sofa seating area under moody amber lamps showing the actual room layout",
